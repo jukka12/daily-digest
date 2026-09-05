@@ -565,6 +565,26 @@ html[data-style="chat"] .item-row {
   html[data-style="admin"] .sidebar { display: none !important; }
 }
 
+
+html.dd-chat nav.sidebar,
+html[data-style="chat"] nav.sidebar {
+  display: none !important;
+}
+html.dd-chat .section-block.admin-card,
+html[data-style="chat"] .section-block.admin-card {
+  /* safety: if class lingers, still look like chat sections */
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  color: var(--ink) !important;
+}
+html.dd-chat .sec-count,
+html.dd-chat .sec-unit,
+html[data-style="chat"] .sec-count,
+html[data-style="chat"] .sec-unit { display: none !important; }
+
 </style>
 </head>
 <body>
@@ -631,15 +651,33 @@ html[data-style="chat"] .item-row {
   function currentStyle() {
     return document.documentElement.getAttribute("data-style") === "admin" ? "admin" : "chat";
   }
-  function applySidebar(s) {
+  function applySidebarForStyle(s) {
     var side = document.querySelector("nav.sidebar");
     if (!side) return;
     if (s === "admin") {
       var narrow = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
+      side.hidden = !!narrow;
       side.style.setProperty("display", narrow ? "none" : "flex", "important");
     } else {
+      side.hidden = true;
       side.style.setProperty("display", "none", "important");
     }
+  }
+  function stripAdminCards() {
+    document.querySelectorAll(".section-block").forEach(function (sec) {
+      sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
+      sec.style.cssText = "";
+      sec.querySelectorAll(".sec-count, .sec-unit").forEach(function (n) { n.remove(); });
+      var head = sec.querySelector(".section-head");
+      if (head) {
+        head.style.cssText = "";
+        head.onclick = null;
+        head.removeAttribute("role");
+        head.removeAttribute("aria-expanded");
+      }
+      var list = sec.querySelector(".item-list");
+      if (list) list.style.display = "";
+    });
   }
   function setStyle(style) {
     var s = style === "admin" ? "admin" : "chat";
@@ -648,29 +686,19 @@ html[data-style="chat"] .item-row {
     root.classList.toggle("dd-admin", s === "admin");
     root.classList.toggle("dd-chat", s === "chat");
     try { localStorage.setItem("dd-style", s); } catch (e) {}
-    // Show CURRENT style; click toggles to the other
+    // Current theme name on the button
     btn.textContent = s === "admin" ? "Admin" : "Chat";
     btn.setAttribute("aria-label", s === "admin" ? "Nykyinen Admin — napsauta vaihtaaksesi Chatiin" : "Nykyinen Chat — napsauta vaihtaaksesi Adminiin");
-    btn.title = s === "admin" ? "Nykyinen: Admin (napsauta → Chat)" : "Nykyinen: Chat (napsauta → Admin)";
-    applySidebar(s);
-    void root.offsetHeight;
-    if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
-    applySidebar(s);
+    btn.title = s === "admin" ? "Nykyinen: Admin (napsauta vaihtaaksesi Chatiin)" : "Nykyinen: Chat (napsauta vaihtaaksesi Adminiin)";
     if (s === "chat") {
-      document.querySelectorAll(".section-block").forEach(function (sec) {
-        sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
-        sec.style.cssText = "";
-        var head = sec.querySelector(".section-head");
-        if (head) {
-          head.style.cssText = "";
-          head.onclick = null;
-          head.removeAttribute("role");
-          head.removeAttribute("aria-expanded");
-        }
-      });
+      stripAdminCards();
+      applySidebarForStyle("chat");
     } else {
-      applySidebar("admin");
+      applySidebarForStyle("admin");
+      if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
+      applySidebarForStyle("admin");
     }
+    void root.offsetHeight;
   }
   btn.addEventListener("click", function () {
     setStyle(currentStyle() === "admin" ? "chat" : "admin");
