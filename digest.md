@@ -1,6 +1,6 @@
 # Digest
 
-## 1) Needs you
+## Sähköpostit:
 
 1. **Luominen ry** — Alkusyksyn lukuvinkkejä ja kauppakirje.
 2. **Matt Sorger** — Intian Rescue1-kuukausikatsaus.
@@ -15,11 +15,11 @@
 11. **Krista Abbott** — Lukematon mainos kirjoituskurssista (vanhempi).
 12. **Minisforum EU** — Lukematon minitietokoneen tarjous (vanhempi).
 
-## 2) Calendar
+## Kalenteri
 
 (empty)
 
-## 3) Changed
+## Uutiset:
 
 1. Cathie: human-driven cars will be called WMDs (quotes Brett Winton)
    https://x.com/CathieDWood/status/2096167207705174265
@@ -36,14 +36,9 @@
 5. Elon: Serious tonnage to space (on Starbase Louisiana)
    https://x.com/elonmusk/status/2096117629739999581
 
-## 4) Videos
+## Youtube
 
 (empty)
 
-## 5) When it matters
 
-1. [tesla.com/robotaxi](https://www.tesla.com/robotaxi) — seuraava muutos kaupungeissa, hinnassa tai Cybercab-hailissa.
-2. [spacex.com/launches](https://www.spacex.com/launches) — seuraava listattu: Starlink Falcon 9 SLC-4E 6.9. 03:59–07:59 PT; ikkunan siirto muuttaa tilanteen.
-3. [ir.tesla.com](https://ir.tesla.com) — Access Denied; uusi tulos- tai tiedotepäivä muuttaa IR-kuvan.
-
-tila: valmis · päivitetty 5.9 19:48 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri 5.9–7.9; Radar alkaen 5.9 07:42
+tila: valmis · päivitetty 5.9 19:53 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri 5.9–7.9; Radar alkaen 5.9 07:42
