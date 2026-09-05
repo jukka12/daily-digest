@@ -1,16 +1,16 @@
 # Digest
 
 status: ready
-updated: 5.9 07:43
-window: mail last 24h; calendar 5.9–7.9; Radar since 4.9 07:38
+updated: 5.9 16:47
+window: mail last 24h; calendar 5.9–7.9; Radar since 5.9 07:42
 
 ## 1) Needs you
 
-1. **Elsi Mäkinen, OP** — Pankki laatii jakokirjan osakkaiden sopimuksen mukaan. Muutokset ennen 11.9.; muuten mennään luonnoksella. Lunastus pesän ulkopuolisilla varoilla tuo varainsiirtoveron.
-   https://mail.google.com/mail/#all/1a067ec269804f22
+1. **Coinbase** — Tervetuloa Developer Platformiin; varmista että rekisteröidyit itse.
+   https://outlook.live.com/owa/?ItemID=AQMkADAwATM0MDAAMS04YWNjAC0wNjA4LTAwAi0wMAoARgAAA4%2BWGodb%2FOhNrZs%2B282V87YHAKQownVqbNJApIOLC6OcjqAAAAIBCgAAAKQownVqbNJApIOLC6OcjqAACVYUdwkAAAA%3D&exvsurl=1&viewmodel=ReadMessageItem
 
-2. **CleanShot Cloud** — Salasana vaihdettiin 4.9 (uudelleenasetus + kuitti 23,85 $). Varmista, että se olit sinä.
-   https://outlook.live.com/owa/?ItemID=AQMkADAwATM0MDAAMS04YWNjAC0wNjA4LTAwAi0wMAoARgAAA4%2BWGodb%2FOhNrZs%2B282V87YHAKQownVqbNJApIOLC6OcjqAAAAIBCgAAAKQownVqbNJApIOLC6OcjqAACVIQ0VAAAAA%3D&exvsurl=1&viewmodel=ReadMessageItem
+2. **Apple** — Hide My Email luotu luma.com-palveluun 4.9; viestit ohjautuvat postilaatikkoosi.
+   https://mail.google.com/mail/#all/1a06dbf55adf50e3
 
 ## 2) Calendar
 
@@ -18,48 +18,27 @@ window: mail last 24h; calendar 5.9–7.9; Radar since 4.9 07:38
 
 ## 3) Changed
 
-1. Elon: Cybercab factory system is unlike any other automotive production line
-   https://x.com/elonmusk/status/2096059393376678391
+1. Cathie: human-driven cars will be called WMDs (quotes Brett Winton)
+   https://x.com/CathieDWood/status/2096167207705174265
 
-2. Elon: Lithium made in America (quotes first Cybertruck with Gulf Coast lithium 4680s)
-   https://x.com/elonmusk/status/2096019186510094759
+2. Cathie: AI is already a technology revolution — ARK rarely underestimates the pace
+   https://x.com/CathieDWood/status/2096164982144548936
 
-3. Elon: The future of transport (quotes Sawyer’s multi-hour Cybercab rides)
-   https://x.com/elonmusk/status/2096018119433015594
+3. Elon: It will only get better (quotes a Cybercab rider saying it’s the most enjoyable AV ride)
+   https://x.com/elonmusk/status/2096138449250091368
 
-4. Elon: You will be able to plug in your PlayStation or Xbox (on Tesla’s Cybercab post)
-   https://x.com/elonmusk/status/2096072197244596690
+4. Elon: True — Tesla under the hood is first-principles vs other cars
+   https://x.com/elonmusk/status/2096137939134591024
 
-5. Elon: Grok Imagine Odyssey Contest
-   https://x.com/elonmusk/status/2096015527088902365
-
-6. Starlink: referral program — earn cash; referred person gets one month free
-   https://x.com/Starlink/status/2096016018028323111
+5. Elon: Serious tonnage to space (on Starbase Louisiana)
+   https://x.com/elonmusk/status/2096117629739999581
 
 ## 4) Videos
 
-1. **Brighter with Herbert — Elon Is Building EVERYTHING At Once**
-   Herbert on Elon building multiple programs in parallel.
-   https://www.youtube.com/watch?v=HMT2OfYep7k
-   4.9 16:30
-
-2. **Brighter with Herbert — EXCLUSIVE: This Is Tesla’s Full Robotaxi Master Plan**
-   Herbert’s exclusive on the full Robotaxi master plan.
-   https://www.youtube.com/watch?v=VDOLXgmgoUg
-   4.9 10:20
-
-3. **What about it!? — SpaceX Just Confirmed A Massive Milestone For Flight 14!**
-   Flight 14 milestone update on What about it!?.
-   https://www.youtube.com/watch?v=g4QXblvErmk
-   4.9 17:04
-
-4. **NASASpaceflight — Next ISS Mission Delayed | This Week in Spaceflight**
-   Weekly spaceflight roundup; ISS mission delay.
-   https://www.youtube.com/watch?v=5NXbngw6Qcg
-   5.9 02:32
+(empty)
 
 ## 5) When it matters
 
 1. [tesla.com/robotaxi](https://www.tesla.com/robotaxi) — seuraava muutos kaupungeissa, hinnassa tai Cybercab-hailissa.
 2. [spacex.com/launches](https://www.spacex.com/launches) — seuraava listattu: Starlink Falcon 9 SLC-4E 6.9. 03:59–07:59 PT; ikkunan siirto muuttaa tilanteen.
-3. [ir.tesla.com](https://ir.tesla.com) — sivusto oli alhaalla (Access Denied); uusi tulos-/tiedotepäivä muuttaa IR-kuvan.
+3. [ir.tesla.com](https://ir.tesla.com) — uusi tulos- tai tiedotepäivä muuttaa IR-kuvan.
