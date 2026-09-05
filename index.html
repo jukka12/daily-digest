@@ -294,11 +294,9 @@ var ICONS = {
   youtube: '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#FF0000"/><path fill="#fff" d="M40 32.5v35l30-17.5L40 32.5z"/></svg>'
 };
 
-var APP_LINKS = {
-  /* https inbox/calendar — Mac Mail rejects bare message scheme (error 1030) */
-  mail: "https://mail.google.com/mail/u/0/#inbox",
-  calendar: "https://calendar.google.com/calendar/"
-};
+/* No section-head app links for mail/calendar:
+   bare message:// → Mac Mail error 1030; Gmail/OWA https unwanted. */
+var APP_LINKS = {};
 
 function sectionKind(title) {
   var t = (title || "").toLowerCase();
