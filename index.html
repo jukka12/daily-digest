@@ -550,8 +550,6 @@ html[data-style="chat"] .rail-mark {
 /* Chat owns dark Kanavat sidebar (desktop) */
 html[data-style="chat"] .sidebar {
   display: flex !important;
-  width: 220px !important;
-  flex: 0 0 220px !important;
   background: var(--sidebar) !important;
   color: var(--sidebar-text) !important;
 }
@@ -698,6 +696,14 @@ html[data-style="chat"] .sec-unit { display: none !important; }
       var narrow = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
       side.hidden = !!narrow;
       side.style.setProperty("display", narrow ? "none" : "flex", "important");
+      if (!narrow) {
+        var w = 220;
+        try { w = parseInt(localStorage.getItem("dd-sidebar-width") || "220", 10) || 220; } catch (e) {}
+        w = Math.max(64, Math.min(360, w));
+        side.style.setProperty("width", w + "px", "important");
+        side.style.setProperty("flex-basis", w + "px", "important");
+        side.classList.toggle("collapsed", w <= 96);
+      }
     } else {
       side.hidden = true;
       side.style.setProperty("display", "none", "important");
