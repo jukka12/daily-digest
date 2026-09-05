@@ -3,32 +3,189 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Daily Digest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; max-width: 46rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.45; }
-  h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
-  .meta { color: #666; font-size: 0.9rem; margin-bottom: 1.5rem; }
-  a { color: inherit; }
-  @media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+  :root {
+    --bg: #f6f3ee;
+    --bg-elev: #fffdf9;
+    --ink: #1c1917;
+    --muted: #78716c;
+    --line: #e7e0d5;
+    --accent: #0f766e;
+    --accent-soft: #ccfbf1;
+    --danger: #b91c1c;
+    --shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 12px 32px rgba(28, 25, 23, 0.06);
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c0a09;
+      --bg-elev: #1c1917;
+      --ink: #fafaf9;
+      --muted: #a8a29e;
+      --line: #292524;
+      --accent: #5eead4;
+      --accent-soft: #134e4a;
+      --danger: #fca5a5;
+      --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 16px 40px rgba(0,0,0,0.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 500px at 10% -10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
+      radial-gradient(900px 420px at 100% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+  .shell {
+    width: min(44rem, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2.5rem 0 4rem;
+  }
+  header.hero {
+    margin-bottom: 1.75rem;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.65rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0.85rem 0 0.55rem;
+  }
+  .lede {
+    margin: 0;
+    color: var(--muted);
+    max-width: 36rem;
+    font-size: 1.02rem;
+  }
+  .panel {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(1.25rem, 3vw, 1.85rem);
+  }
+  #err:empty { display: none; }
+  #err {
+    margin-bottom: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--danger) 12%, transparent);
+    color: var(--danger);
+    font-size: 0.95rem;
+  }
   #content h1 { display: none; }
-  #content h2 { font-size: 1.15rem; margin-top: 1.5rem; border-bottom: 1px solid #ddd; padding-bottom: 0.25rem; }
-  @media (prefers-color-scheme: dark) { #content h2 { border-color: #444; } }
-  #content p, #content li { margin: 0.35rem 0; }
-  #err { color: #b00020; }
+  #content > p:first-of-type {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 0;
+  }
+  #content h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 1.22rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 1.85rem 0 0.75rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--line);
+  }
+  #content h2:first-of-type { margin-top: 0.35rem; }
+  #content p {
+    margin: 0.45rem 0;
+  }
+  #content ol {
+    margin: 0.4rem 0 0.9rem;
+    padding-left: 1.2rem;
+  }
+  #content li {
+    margin: 0.55rem 0;
+    padding-left: 0.2rem;
+  }
+  #content li::marker {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  #content strong {
+    font-weight: 600;
+  }
+  #content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+  #content a:hover {
+    text-decoration-thickness: 2px;
+  }
+  #content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--line) 70%, transparent);
+  }
+  footer.note {
+    margin-top: 1.25rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer.note a { color: inherit; }
 </style>
 </head>
 <body>
-  <h1>Daily Digest</h1>
-  <p class="meta">Morning brief · lähde: <code>digest.md</code></p>
-  <div id="err"></div>
-  <article id="content">Ladataan…</article>
+  <div class="shell">
+    <header class="hero">
+      <span class="eyebrow">Morning brief</span>
+      <h1>Daily Digest</h1>
+      <p class="lede">Posti, kalenteri, X, YouTube ja seurattavat sivut — yksi tiivis aamuraportti.</p>
+    </header>
+    <div id="err"></div>
+    <main class="panel">
+      <article id="content">Ladataan…</article>
+    </main>
+    <footer class="note">Lähde: <code>digest.md</code> · <a href="https://github.com/jukka12/daily-digest">jukka12/daily-digest</a></footer>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     fetch('digest.md', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.text(); })
       .then(t => { document.getElementById('content').innerHTML = marked.parse(t); })
-      .catch(e => { document.getElementById('err').textContent = 'digest.md ei latautunut: ' + e.message; document.getElementById('content').textContent = ''; });
+      .catch(e => {
+        document.getElementById('err').textContent = 'digest.md ei latautunut: ' + e.message;
+        document.getElementById('content').textContent = '';
+      });
   </script>
 </body>
 </html>
