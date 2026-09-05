@@ -71,15 +71,35 @@ body {
   display: grid; place-items: center;
   font-weight: 700; font-size: 12px; letter-spacing: -0.02em;
 }
-.theme-toggle {
+.style-rail {
   margin-top: auto; width: 36px; height: 36px; border-radius: 10px;
   border: 0; background: transparent; color: var(--sidebar-text);
   cursor: pointer; display: grid; place-items: center;
+  font-weight: 700; font-size: 13px;
 }
-.theme-toggle:hover { background: var(--sidebar-hover); }
-.theme-toggle svg { width: 18px; height: 18px; }
-html[data-theme="light"] .icon-moon { display: none; }
-html[data-theme="dark"] .icon-sun { display: none; }
+.style-rail:hover { background: var(--sidebar-hover); }
+.theme-toggle.xd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.theme-toggle.xd:hover { opacity: 0.8; }
+.theme-toggle.xd svg { width: 20px; height: 20px; display: block; }
+.theme-toggle.xd .icon-sun { display: none; }
+.theme-toggle.xd .icon-moon { display: block; }
+html[data-theme="light"] .theme-toggle.xd .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle.xd .icon-sun { display: block; }
+html[data-theme="dark"] .theme-toggle.xd .icon-sun { display: none; }
+html[data-theme="dark"] .theme-toggle.xd .icon-moon { display: block; }
 .sidebar {
   width: 220px; flex: 0 0 220px;
   background: var(--sidebar); color: var(--sidebar-text);
@@ -174,6 +194,13 @@ a.item-row:hover, .item-row:hover { background: var(--msg-hover); text-decoratio
 .item-row strong { font-weight: 600; }
 a, #content a { color: var(--accent); text-decoration: none; }
 a:hover { opacity: .9; }
+a.item-row, #content a.item-row,
+.item-row a, #content .item-row a {
+  color: inherit !important;
+  font: inherit;
+  text-decoration: none !important;
+}
+a.item-row:hover, #content a.item-row:hover { opacity: 1; }
 #content code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.88em; padding: 0.08em 0.3em; border-radius: 4px;
@@ -194,16 +221,6 @@ a:hover { opacity: .9; }
   display: flex; align-items: center; justify-content: flex-end; gap: 8px;
   padding: 10px 16px 0; flex: 0 0 auto;
 }
-.style-toggle {
-  border: 1px solid var(--border);
-  background: var(--msg-bg);
-  color: var(--ink);
-  font: inherit; font-size: 12px; font-weight: 600;
-  padding: 7px 12px; border-radius: 999px;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,.04);
-}
-.style-toggle:hover { opacity: .9; }
 .kpi-strip { display: none; }
 
 /* —— Admin Dashboard UI (alternate; chat layout preserved) —— */
@@ -308,13 +325,19 @@ html[data-style="admin"] .section-block.admin-card.expanded {
 html[data-style="admin"] .section-block.admin-card:not(.expanded) .item-list {
   display: none;
 }
+html[data-style="admin"] .section-block.admin-card {
+  color: #0f172a;
+}
+html[data-theme="dark"][data-style="admin"] .section-block.admin-card {
+  color: #ffffff;
+}
 html[data-style="admin"] .section-block.admin-card:not(.expanded) .section-head {
   margin: 0;
-  padding: 4px;
+  padding: 6px 4px;
   border-bottom: 0;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
+  gap: 10px;
   cursor: pointer;
 }
 html[data-style="admin"] .section-block.admin-card:not(.expanded) .section-head h2 {
@@ -331,12 +354,21 @@ html[data-style="admin"] .section-block.admin-card .sec-count {
   line-height: 1;
   color: inherit;
 }
+html[data-style="admin"] .section-block.admin-card .sec-unit {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: inherit;
+  opacity: 0.9;
+}
 html[data-style="admin"] .section-block.admin-card.expanded .section-head {
   margin: 0 0 10px;
   padding: 2px 2px 12px;
   border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
   cursor: pointer;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
@@ -346,43 +378,35 @@ html[data-style="admin"] .section-block.admin-card.expanded .section-head h2 {
   margin: 0; clip: auto; overflow: visible;
   font-size: 16px; font-weight: 700;
   color: inherit;
-  flex: 1;
+  flex: 1 1 auto;
+  order: 2;
 }
-html[data-style="admin"] .section-block.admin-card.expanded .sec-count {
-  font-size: 18px;
-  opacity: .85;
-  margin-left: auto;
+html[data-style="admin"] .section-block.admin-card.expanded .app-icon { order: 1; }
+html[data-style="admin"] .section-block.admin-card.expanded .sec-count,
+html[data-style="admin"] .section-block.admin-card.expanded .sec-unit {
+  display: none;
 }
 html[data-style="admin"] .section-block.admin-card .item-list { gap: 0; }
 html[data-style="admin"] .section-block.admin-card .item-row {
-  padding: 11px 10px;
-  border-radius: 10px;
+  padding: 10px 4px;
+  border-radius: 0;
   border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
   color: inherit;
-  background: color-mix(in srgb, #fff 35%, transparent);
-}
-html[data-theme="dark"][data-style="admin"] .section-block.admin-card .item-row {
-  background: color-mix(in srgb, #000 22%, transparent);
+  background: transparent !important;
 }
 html[data-style="admin"] .section-block.admin-card .item-list .item-row:last-child { border-bottom: 0; }
 html[data-style="admin"] .section-block.admin-card .item-row:hover {
-  background: color-mix(in srgb, #fff 55%, transparent);
-}
-html[data-theme="dark"][data-style="admin"] .section-block.admin-card .item-row:hover {
-  background: color-mix(in srgb, #000 35%, transparent);
+  background: transparent !important;
+  opacity: 0.92;
 }
 html[data-style="admin"] .section-block.admin-card .item-row .sub {
-  color: color-mix(in srgb, currentColor 72%, transparent);
+  color: inherit;
+  opacity: 0.85;
 }
 html[data-style="admin"] .status-foot {
   border-top: 1px solid var(--admin-border);
   color: var(--admin-muted);
   background: transparent;
-}
-html[data-style="admin"] .style-toggle {
-  border-color: var(--admin-border);
-  background: var(--admin-card);
-  color: var(--admin-ink);
 }
 @media (max-width: 900px) {
   html[data-style="admin"] #content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -397,10 +421,7 @@ html[data-style="admin"] .style-toggle {
   <div class="app">
     <aside class="rail" aria-label="Workspace">
       <div class="rail-mark" title="Daily Digest">DD</div>
-      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Vaihda tumma tai vaalea teema" title="Tumma / vaalea">
-        <span class="icon-sun">sun</span>
-        <span class="icon-moon">moon</span>
-      </button>
+      <button type="button" class="style-rail" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Chat / Admin">A</button>
     </aside>
     <nav class="sidebar" aria-label="Osiot">
       <h1>Daily Digest</h1>
@@ -410,7 +431,21 @@ html[data-style="admin"] .style-toggle {
     </nav>
     <main class="main">
       <div class="topbar">
-        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Chat / Admin">Admin</button>
+        <button type="button" class="theme-toggle xd" id="themeToggle" title="Switch light / dark" aria-label="Switch light and dark theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <mask id="dd-moon-cut">
+                <rect width="24" height="24" fill="#fff"/>
+                <circle cx="7.5" cy="10" r="7.2" fill="#000"/>
+              </mask>
+            </defs>
+            <circle cx="12.5" cy="12" r="8.2" fill="currentColor" mask="url(#dd-moon-cut)"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.4"/>
+            <path d="M12 2.2v2.3M12 19.5v2.3M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.2 12h2.3M19.5 12h2.3M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/>
+          </svg>
+        </button>
       </div>
       <div id="err"></div>
       <div class="thread"><article id="content"></article></div>
@@ -430,7 +465,9 @@ html[data-style="admin"] .style-toggle {
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     try { localStorage.setItem('dd-theme', theme); } catch (e) {}
-    btn.setAttribute('aria-label', theme === 'dark' ? 'Vaihda vaaleaan teemaan' : 'Vaihda tummaan teemaan');
+    btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light' : 'Switch to dark');
+    btn.title = theme === 'dark' ? 'Switch to light' : 'Switch to dark';
+    btn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
   }
   btn.addEventListener('click', function () {
     setTheme(current() === 'dark' ? 'light' : 'dark');
@@ -447,7 +484,7 @@ html[data-style="admin"] .style-toggle {
     var s = style === "admin" ? "admin" : "chat";
     document.documentElement.setAttribute("data-style", s);
     try { localStorage.setItem("dd-style", s); } catch (e) {}
-    btn.textContent = s === "admin" ? "Chat" : "Admin";
+    btn.textContent = s === "admin" ? "C" : "A";
     btn.setAttribute("aria-label", s === "admin" ? "Vaihda chat-tyyliin" : "Vaihda admin-dashboard -tyyliin");
     btn.title = s === "admin" ? "Chat App UI" : "Admin Dashboard UI";
     if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
@@ -720,10 +757,10 @@ function refreshAdminKpis() {
   if (old) old.remove();
   var sections = Array.from(content.querySelectorAll(".section-block"));
   var isAdmin = document.documentElement.getAttribute("data-style") === "admin";
+  var units = { mail: "Viestiä", calendar: "Tapahtumaa", x: "Postausta", youtube: "Videota" };
   sections.forEach(function (sec) {
     sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
-    var c = sec.querySelector(".sec-count");
-    if (c) c.remove();
+    sec.querySelectorAll(".sec-count, .sec-unit").forEach(function (n) { n.remove(); });
     var head = sec.querySelector(".section-head");
     if (head) {
       head.onclick = null;
@@ -742,6 +779,10 @@ function refreshAdminKpis() {
     countEl.className = "sec-count";
     countEl.textContent = String(count);
     head.appendChild(countEl);
+    var unitEl = document.createElement("span");
+    unitEl.className = "sec-unit";
+    unitEl.textContent = units[kind] || "Riviä";
+    head.appendChild(unitEl);
     head.setAttribute("role", "button");
     head.setAttribute("aria-expanded", "false");
     head.onclick = function () {
