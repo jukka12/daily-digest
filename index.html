@@ -501,26 +501,9 @@ html[data-style="chat"] .rail {
 html[data-style="chat"] .rail-mark {
   background: var(--accent) !important;
 }
+/* Chat: hide Kanavat sidebar on all widths (matches iPhone; avoids Admin chrome lingering on Mac) */
 html[data-style="chat"] .sidebar {
-  display: flex !important;
-  width: 220px !important;
-  flex: 0 0 220px !important;
-  background: var(--sidebar) !important;
-  color: var(--sidebar-text) !important;
-  border-right: 1px solid rgba(255,255,255,.04) !important;
-}
-html[data-style="chat"] .sidebar h1 { color: #fff !important; }
-html[data-style="chat"] .sidebar .lede,
-html[data-style="chat"] .nav-label { color: var(--sidebar-muted) !important; }
-html[data-style="chat"] .nav-item {
-  color: var(--sidebar-text) !important;
-  background: transparent !important;
-  border-radius: 8px !important;
-}
-html[data-style="chat"] .nav-item:hover { background: var(--sidebar-hover) !important; }
-html[data-style="chat"] .nav-item.active {
-  background: var(--accent) !important;
-  color: #fff !important;
+  display: none !important;
 }
 html[data-style="chat"] #content {
   display: block !important;
@@ -568,11 +551,7 @@ html[data-style="chat"] .item-row {
   color: var(--ink) !important;
   background: transparent !important;
 }
-@media (max-width: 820px) {
-  html[data-style="chat"] .sidebar { width: 160px !important; flex-basis: 160px !important; }
-}
 @media (max-width: 640px) {
-  html[data-style="chat"] .sidebar { display: none !important; }
   html[data-style="admin"] .sidebar { display: none !important; }
 }
 
