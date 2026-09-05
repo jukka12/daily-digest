@@ -71,13 +71,37 @@ body {
   display: grid; place-items: center;
   font-weight: 700; font-size: 12px; letter-spacing: -0.02em;
 }
-.style-rail {
-  margin-top: auto; width: 36px; height: 36px; border-radius: 10px;
-  border: 0; background: transparent; color: var(--sidebar-text);
-  cursor: pointer; display: grid; place-items: center;
-  font-weight: 700; font-size: 13px;
+.rail .spacer { margin-top: auto; }
+.style-foot {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--border);
+  background: transparent;
 }
-.style-rail:hover { background: var(--sidebar-hover); }
+.style-toggle {
+  border: 1px solid var(--border);
+  background: var(--msg-bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+.style-toggle:hover { opacity: .9; }
+html[data-style="admin"] .style-foot {
+  border-top-color: var(--admin-border);
+}
+html[data-style="admin"] .style-toggle {
+  border-color: var(--admin-border);
+  background: var(--admin-card);
+  color: var(--admin-ink);
+}
 .theme-toggle.xd {
   display: inline-flex;
   align-items: center;
@@ -421,7 +445,7 @@ html[data-style="admin"] .status-foot {
   <div class="app">
     <aside class="rail" aria-label="Workspace">
       <div class="rail-mark" title="Daily Digest">DD</div>
-      <button type="button" class="style-rail" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Chat / Admin">A</button>
+      <div class="spacer" aria-hidden="true"></div>
     </aside>
     <nav class="sidebar" aria-label="Osiot">
       <h1>Daily Digest</h1>
@@ -449,9 +473,10 @@ html[data-style="admin"] .status-foot {
       </div>
       <div id="err"></div>
       <div class="thread"><article id="content"></article></div>
-      <footer class="status-foot" aria-label="Tila">
-        <span id="footChannel"># kaikki</span>
-        <span id="footMeta">Ladataan…</span>
+      <footer class="style-foot" aria-label="Tyyli">
+        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Chat / Admin">Admin</button>
+        <span id="footChannel" hidden># kaikki</span>
+        <span id="footMeta" hidden>Ladataan…</span>
       </footer>
     </main>
   </div>
@@ -484,7 +509,7 @@ html[data-style="admin"] .status-foot {
     var s = style === "admin" ? "admin" : "chat";
     document.documentElement.setAttribute("data-style", s);
     try { localStorage.setItem("dd-style", s); } catch (e) {}
-    btn.textContent = s === "admin" ? "C" : "A";
+    btn.textContent = s === "admin" ? "Chat" : "Admin";
     btn.setAttribute("aria-label", s === "admin" ? "Vaihda chat-tyyliin" : "Vaihda admin-dashboard -tyyliin");
     btn.title = s === "admin" ? "Chat App UI" : "Admin Dashboard UI";
     if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
