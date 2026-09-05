@@ -600,7 +600,7 @@ html[data-style="chat"] .item-row {
       <div id="err"></div>
       <div class="thread"><article id="content"></article></div>
       <footer class="style-foot" aria-label="Tyyli">
-        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Chat / Admin">Admin</button>
+        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Nykyinen: Chat — vaihda Adminiin">→ Admin</button>
         <span id="footChannel" hidden># kaikki</span>
         <span id="footMeta" hidden>Ladataan…</span>
       </footer>
@@ -638,10 +638,20 @@ html[data-style="chat"] .item-row {
     root.classList.toggle("dd-admin", s === "admin");
     root.classList.toggle("dd-chat", s === "chat");
     try { localStorage.setItem("dd-style", s); } catch (e) {}
-    btn.textContent = s === "admin" ? "Chat" : "Admin";
-    btn.setAttribute("aria-label", s === "admin" ? "Vaihda chat-tyyliin" : "Vaihda admin-dashboard -tyyliin");
-    btn.title = s === "admin" ? "Chat App UI" : "Admin Dashboard UI";
-    // Force layout refresh (helps Brave desktop keep attribute-driven CSS in sync)
+    // Button shows the OTHER style (what a click will switch to)
+    btn.textContent = s === "admin" ? "→ Chat" : "→ Admin";
+    btn.setAttribute("aria-label", s === "admin" ? "Vaihda Chat-tyyliin" : "Vaihda Admin-tyyliin");
+    btn.title = s === "admin" ? "Nykyinen: Admin — vaihda Chatiin" : "Nykyinen: Chat — vaihda Adminiin";
+    // Drive sidebar in JS so Brave desktop cannot keep a stale CSS display
+    var side = document.querySelector("nav.sidebar");
+    if (side) {
+      if (s === "admin") {
+        var narrow = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
+        side.style.setProperty("display", narrow ? "none" : "flex", "important");
+      } else {
+        side.style.setProperty("display", "none", "important");
+      }
+    }
     void root.offsetHeight;
     if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
     if (s === "chat") {
@@ -660,6 +670,9 @@ html[data-style="chat"] .item-row {
   }
   btn.addEventListener("click", function () {
     setStyle(currentStyle() === "admin" ? "chat" : "admin");
+  });
+  window.addEventListener("resize", function () {
+    setStyle(currentStyle());
   });
   setStyle(currentStyle());
 })();
