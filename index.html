@@ -1024,7 +1024,7 @@ function refreshAdminKpis() {
   if (old) old.remove();
   var sections = Array.from(content.querySelectorAll(".section-block"));
   var isAdmin = document.documentElement.getAttribute("data-style") === "admin";
-  var units = { mail: "Viestiä", calendar: "Tapahtumaa", x: "Postausta", youtube: "Videota" };
+  var units = { mail: "Mails", calendar: "Events", x: "Posts", youtube: "Videos" };
   var openIds = {};
   sections.forEach(function (sec) {
     if (sec.classList.contains("expanded")) openIds[sec.id] = true;
@@ -1052,7 +1052,7 @@ function refreshAdminKpis() {
     head.appendChild(countEl);
     var unitEl = document.createElement("span");
     unitEl.className = "sec-unit";
-    unitEl.textContent = units[kind] || "Riviä";
+    unitEl.textContent = units[kind] || "Items";
     head.appendChild(unitEl);
     head.setAttribute("role", "button");
     var keepOpen = !!openIds[sec.id];
