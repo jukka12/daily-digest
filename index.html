@@ -374,16 +374,26 @@ html[data-style="admin"] .section-block.admin-card:not(.expanded) .section-head 
   overflow: hidden; clip: rect(0,0,0,0);
   white-space: nowrap; border: 0;
 }
+html[data-style="admin"] .section-block.admin-card .app-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 10px;
+}
+html[data-style="admin"] .section-block.admin-card .app-icon svg {
+  width: 40px;
+  height: 40px;
+}
 html[data-style="admin"] .section-block.admin-card .sec-count {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: 750;
   letter-spacing: -0.03em;
   line-height: 1;
   color: inherit;
 }
 html[data-style="admin"] .section-block.admin-card .sec-unit {
-  font-size: 14px;
-  font-weight: 650;
+  font-size: 18px;
+  font-weight: 700;
   letter-spacing: 0.01em;
   color: inherit;
   opacity: 0.95;
@@ -608,15 +618,16 @@ function extractHref(el) {
   return m ? m[0] : null;
 }
 
-function buildItemRows(container) {
+function buildItemRows(container, kind) {
   var list = document.createElement("div");
   list.className = "item-list";
   var items = [];
   container.querySelectorAll("li").forEach(function (li) { items.push(li); });
+  var allowLinks = !(kind === "mail" || kind === "calendar");
   if (!items.length) {
     Array.from(container.childNodes).forEach(function (n) {
       if (n.nodeType === 1 && (n.tagName === "P" || n.tagName === "DIV")) {
-        var href = extractHref(n);
+        var href = allowLinks ? extractHref(n) : null;
         var row = document.createElement(href ? "a" : "div");
         row.className = "item-row";
         if (href) { row.href = href; row.target = "_blank"; row.rel = "noopener noreferrer"; }
@@ -634,7 +645,7 @@ function buildItemRows(container) {
     return list;
   }
   items.forEach(function (li) {
-    var href = extractHref(li);
+    var href = allowLinks ? extractHref(li) : null;
     var row = document.createElement(href ? "a" : "div");
     row.className = "item-row";
     if (href) { row.href = href; row.target = "_blank"; row.rel = "noopener noreferrer"; }
@@ -744,7 +755,7 @@ function renderChat(root, markdownHtml) {
         bodyWrap.appendChild(n);
         i += 1;
       }
-      block.appendChild(buildItemRows(bodyWrap));
+      block.appendChild(buildItemRows(bodyWrap, kind));
       frag.appendChild(block);
       (function (secId, secTitle) {
         var b = document.createElement("button");
