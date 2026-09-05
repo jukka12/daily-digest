@@ -299,19 +299,6 @@ var APP_LINKS = {
   calendar: "calshow:"
 };
 
-/* Open custom URL schemes without Brave/Chrome "invalid address" page error */
-function openAppScheme(url) {
-  if (!url) return;
-  var iframe = document.createElement("iframe");
-  iframe.style.display = "none";
-  iframe.setAttribute("aria-hidden", "true");
-  iframe.src = url;
-  document.body.appendChild(iframe);
-  setTimeout(function () {
-    try { document.body.removeChild(iframe); } catch (e) {}
-  }, 1500);
-}
-
 function sectionKind(title) {
   var t = (title || "").toLowerCase();
   if (t.indexOf("sähkö") === 0 || t.indexOf("sahko") === 0 || t.indexOf("mail") === 0) return "mail";
@@ -431,12 +418,11 @@ function renderChat(root, markdownHtml) {
       var head = document.createElement(appHref ? "a" : "div");
       head.className = "section-head";
       if (appHref) {
-        head.href = "#";
-        head.setAttribute("role", "link");
+        head.href = appHref;
         head.setAttribute("title", kind === "mail" ? "Avaa Mail" : "Avaa Calendar");
         head.addEventListener("click", function (e) {
-          e.preventDefault();
-          openAppScheme(appHref);
+          /* Keep native handoff; also assign so iOS opens the app reliably */
+          try { window.location.assign(appHref); } catch (err) {}
         });
       }
       var icon = document.createElement("span");
