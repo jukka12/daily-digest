@@ -3,10 +3,8 @@
 ## 1) Needs you
 
 1. **Coinbase** — Tervetuloa Developer Platformiin; varmista että rekisteröidyit itse.
-   https://outlook.live.com/owa/?ItemID=AQMkADAwATM0MDAAMS04YWNjAC0wNjA4LTAwAi0wMAoARgAAA4%2BWGodb%2FOhNrZs%2B282V87YHAKQownVqbNJApIOLC6OcjqAAAAIBCgAAAKQownVqbNJApIOLC6OcjqAACVYUdwkAAAA%3D&exvsurl=1&viewmodel=ReadMessageItem
 
 2. **Apple** — Hide My Email luotu luma.com-palveluun 4.9; viestit ohjautuvat postilaatikkoosi.
-   https://mail.google.com/mail/#all/1a06dbf55adf50e3
 
 ## 2) Calendar
 
@@ -39,4 +37,4 @@
 2. [spacex.com/launches](https://www.spacex.com/launches) — seuraava listattu: Starlink Falcon 9 SLC-4E 6.9. 03:59–07:59 PT; ikkunan siirto muuttaa tilanteen.
 3. [ir.tesla.com](https://ir.tesla.com) — Access Denied; uusi tulos- tai tiedotepäivä muuttaa IR-kuvan.
 
-tila: valmis · päivitetty 5.9 16:47 · ikkuna: posti viimeiset 24 h; kalenteri 5.9–7.9; Radar alkaen 5.9 07:42
+tila: valmis · päivitetty 5.9 19:46 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri 5.9–7.9; Radar alkaen 5.9 07:42
