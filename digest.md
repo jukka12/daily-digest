@@ -1,8 +1,8 @@
 # Digest
 
 status: ready
-updated: 2026-09-05 07:43 Europe/Helsinki
-window: mail last 24h; calendar 5.9–7.9; Radar since 2026-09-04 07:38
+updated: 5.9 07:43
+window: mail last 24h; calendar 5.9–7.9; Radar since 4.9 07:38
 
 ## 1) Needs you
 
@@ -43,22 +43,22 @@ window: mail last 24h; calendar 5.9–7.9; Radar since 2026-09-04 07:38
 1. **Brighter with Herbert — Elon Is Building EVERYTHING At Once**
    Herbert on Elon building multiple programs in parallel.
    https://www.youtube.com/watch?v=HMT2OfYep7k
-   2026-09-04 16:30 Europe/Helsinki
+   4.9 16:30
 
 2. **Brighter with Herbert — EXCLUSIVE: This Is Tesla’s Full Robotaxi Master Plan**
    Herbert’s exclusive on the full Robotaxi master plan.
    https://www.youtube.com/watch?v=VDOLXgmgoUg
-   2026-09-04 10:20 Europe/Helsinki
+   4.9 10:20
 
 3. **What about it!? — SpaceX Just Confirmed A Massive Milestone For Flight 14!**
    Flight 14 milestone update on What about it!?.
    https://www.youtube.com/watch?v=g4QXblvErmk
-   2026-09-04 17:04 Europe/Helsinki
+   4.9 17:04
 
 4. **NASASpaceflight — Next ISS Mission Delayed | This Week in Spaceflight**
    Weekly spaceflight roundup; ISS mission delay.
    https://www.youtube.com/watch?v=5NXbngw6Qcg
-   2026-09-05 02:32 Europe/Helsinki
+   5.9 02:32
 
 ## 5) When it matters
 
