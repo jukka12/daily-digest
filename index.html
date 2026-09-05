@@ -600,7 +600,7 @@ html[data-style="chat"] .item-row {
       <div id="err"></div>
       <div class="thread"><article id="content"></article></div>
       <footer class="style-foot" aria-label="Tyyli">
-        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Nykyinen: Chat — vaihda Adminiin">→ Admin</button>
+        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Nykyinen: Chat (napsauta → Admin)">Chat</button>
         <span id="footChannel" hidden># kaikki</span>
         <span id="footMeta" hidden>Ladataan…</span>
       </footer>
@@ -631,6 +631,16 @@ html[data-style="chat"] .item-row {
   function currentStyle() {
     return document.documentElement.getAttribute("data-style") === "admin" ? "admin" : "chat";
   }
+  function applySidebar(s) {
+    var side = document.querySelector("nav.sidebar");
+    if (!side) return;
+    if (s === "admin") {
+      var narrow = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
+      side.style.setProperty("display", narrow ? "none" : "flex", "important");
+    } else {
+      side.style.setProperty("display", "none", "important");
+    }
+  }
   function setStyle(style) {
     var s = style === "admin" ? "admin" : "chat";
     var root = document.documentElement;
@@ -638,22 +648,14 @@ html[data-style="chat"] .item-row {
     root.classList.toggle("dd-admin", s === "admin");
     root.classList.toggle("dd-chat", s === "chat");
     try { localStorage.setItem("dd-style", s); } catch (e) {}
-    // Button shows the OTHER style (what a click will switch to)
-    btn.textContent = s === "admin" ? "→ Chat" : "→ Admin";
-    btn.setAttribute("aria-label", s === "admin" ? "Vaihda Chat-tyyliin" : "Vaihda Admin-tyyliin");
-    btn.title = s === "admin" ? "Nykyinen: Admin — vaihda Chatiin" : "Nykyinen: Chat — vaihda Adminiin";
-    // Drive sidebar in JS so Brave desktop cannot keep a stale CSS display
-    var side = document.querySelector("nav.sidebar");
-    if (side) {
-      if (s === "admin") {
-        var narrow = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
-        side.style.setProperty("display", narrow ? "none" : "flex", "important");
-      } else {
-        side.style.setProperty("display", "none", "important");
-      }
-    }
+    // Show CURRENT style; click toggles to the other
+    btn.textContent = s === "admin" ? "Admin" : "Chat";
+    btn.setAttribute("aria-label", s === "admin" ? "Nykyinen Admin — napsauta vaihtaaksesi Chatiin" : "Nykyinen Chat — napsauta vaihtaaksesi Adminiin");
+    btn.title = s === "admin" ? "Nykyinen: Admin (napsauta → Chat)" : "Nykyinen: Chat (napsauta → Admin)";
+    applySidebar(s);
     void root.offsetHeight;
     if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
+    applySidebar(s);
     if (s === "chat") {
       document.querySelectorAll(".section-block").forEach(function (sec) {
         sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
@@ -666,6 +668,8 @@ html[data-style="chat"] .item-row {
           head.removeAttribute("aria-expanded");
         }
       });
+    } else {
+      applySidebar("admin");
     }
   }
   btn.addEventListener("click", function () {
