@@ -142,10 +142,10 @@ html[data-theme="dark"] .icon-sun { display: none; }
   display: grid; place-items: center; font-weight: 700; font-size: 13px; color: #fff;
   background: var(--accent);
 }
-.avatar.c0 { background: #6c5ce7; }
-.avatar.c1 { background: #0984e3; }
-.avatar.c2 { background: #00b894; }
-.avatar.c3 { background: #e17055; }
+.avatar.letter-M { background: #0984e3; }
+.avatar.letter-C { background: #00b894; }
+.avatar.letter-X { background: #111111; color: #fff; }
+.avatar.letter-Y { background: #d63031; }
 .msg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
 .msg-head .name { font-weight: 700; font-size: 14px; }
 .msg-head .time { font-size: 12px; color: var(--muted); }
@@ -154,13 +154,7 @@ html[data-theme="dark"] .icon-sun { display: none; }
 .msg-body ol { margin: 0.25rem 0 0.4rem; padding-left: 1.15rem; }
 .msg-body li { margin: 0.35rem 0; }
 .msg-body li::marker { color: var(--accent); font-weight: 600; }
-.section-chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin: 18px 10px 8px; padding: 4px 10px; border-radius: 999px;
-  background: var(--accent-soft); color: var(--accent);
-  font-size: 12px; font-weight: 600;
-}
-.section-chip .hash { opacity: .8; }
+.section-block { margin-top: 10px; }
 a, #content a { color: var(--accent); text-decoration: none; }
 a:hover { opacity: .8; }
 a.link-mark, #content a.link-mark {
@@ -293,12 +287,13 @@ function buildFinnishFooter(meta) {
   if (meta.window) parts.push("ikkuna: " + translateWindow(meta.window));
   return parts.join(" \u00b7 ");
 }
-function initials(title) {
-  var t = (title || "").replace(/[:#]/g, "").trim();
-  if (!t) return "DD";
-  var parts = t.split(/\s+/).filter(Boolean);
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[1][0]).toUpperCase();
+function sectionLetter(title) {
+  var t = (title || "").toLowerCase();
+  if (t.indexOf("sähkö") === 0 || t.indexOf("sahko") === 0) return "M";
+  if (t.indexOf("kalenteri") === 0 || t.indexOf("calendar") === 0) return "C";
+  if (t.indexOf("uutiset") === 0) return "X";
+  if (t.indexOf("youtube") === 0 || t.indexOf("video") === 0) return "Y";
+  return "M";
 }
 
 function renderChat(root, markdownHtml) {
@@ -329,15 +324,12 @@ function renderChat(root, markdownHtml) {
       var block = document.createElement("section");
       block.className = "section-block";
       block.id = id;
-      var chip = document.createElement("div");
-      chip.className = "section-chip";
-      chip.innerHTML = "<span class=\"hash\">#</span> " + title;
-      block.appendChild(chip);
       var msg = document.createElement("div");
       msg.className = "message";
       var av = document.createElement("div");
-      av.className = "avatar c" + (color % 4);
-      av.textContent = initials(title);
+      var letter = sectionLetter(title);
+      av.className = "avatar letter-" + letter;
+      av.textContent = letter;
       var body = document.createElement("div");
       body.className = "msg-body";
       i += 1;
