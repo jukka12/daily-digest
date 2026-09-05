@@ -38,7 +38,30 @@
 
 ## Youtube
 
-(empty)
+1. **Next Big Future — Chris Camillo Is Wrong About Cybercab - Here's Why**
+   Counter to Camillo on Cybercab.
+   https://www.youtube.com/watch?v=AjYFIL3FHrQ
+   5.9 19:43
+
+2. **Randy Kirk — Tesla App Store Moment Almost Here Creating Massive New Self Employment Opportunities**
+   App Store / self-employment angle.
+   https://www.youtube.com/watch?v=MJgsoHrnjlo
+   5.9 18:04
+
+3. **Iowa Tesla Guy — Tesla’s BIGGEST Update of 2026 Is Here!**
+   2026 update roundup.
+   https://www.youtube.com/watch?v=CmbD-0Edl9M
+   5.9 17:04
+
+4. **Dave Lee — Tesla just reinvented the car (Cybercab is here)**
+   Cybercab overview.
+   https://www.youtube.com/watch?v=OYx3o27Cw-U
+   5.9 06:04
+
+5. **ARK Invest — Cathie Wood: This Hasn't Happened Since Before The Depression | In The Know**
+   Cathie on market/AI backdrop.
+   https://www.youtube.com/watch?v=bjgy0BVFQx0
+   5.9 02:04
 
 
-tila: valmis · päivitetty 5.9 19:53 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri 5.9–7.9; Radar alkaen 5.9 07:42
+tila: valmis · päivitetty 5.9 20:07 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri 5.9–7.9; Youtube tilaukset 5.9 00:01 alkaen
