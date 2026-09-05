@@ -698,8 +698,15 @@ function enableSwipeDismiss(row, kind) {
       row.style.transform = "translateX(-120%)";
       row.classList.add("dismissing");
       setTimeout(function () {
+        var sec = row.closest(".section-block");
         if (row.parentNode) row.parentNode.removeChild(row);
-        if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
+        if (sec) {
+          var countEl = sec.querySelector(".sec-count");
+          if (countEl) countEl.textContent = String(sec.querySelectorAll(".item-row:not(.dismissing)").length);
+          sec.classList.add("expanded");
+          var head = sec.querySelector(".section-head");
+          if (head) head.setAttribute("aria-expanded", "true");
+        }
       }, 220);
     } else {
       row.style.transform = "";
@@ -913,6 +920,10 @@ function refreshAdminKpis() {
   var sections = Array.from(content.querySelectorAll(".section-block"));
   var isAdmin = document.documentElement.getAttribute("data-style") === "admin";
   var units = { mail: "Viestiä", calendar: "Tapahtumaa", x: "Postausta", youtube: "Videota" };
+  var openIds = {};
+  sections.forEach(function (sec) {
+    if (sec.classList.contains("expanded")) openIds[sec.id] = true;
+  });
   sections.forEach(function (sec) {
     sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
     sec.querySelectorAll(".sec-count, .sec-unit").forEach(function (n) { n.remove(); });
@@ -939,7 +950,13 @@ function refreshAdminKpis() {
     unitEl.textContent = units[kind] || "Riviä";
     head.appendChild(unitEl);
     head.setAttribute("role", "button");
-    head.setAttribute("aria-expanded", "false");
+    var keepOpen = !!openIds[sec.id];
+    if (keepOpen) {
+      sec.classList.add("expanded");
+      head.setAttribute("aria-expanded", "true");
+    } else {
+      head.setAttribute("aria-expanded", "false");
+    }
     head.onclick = function () {
       var willOpen = !sec.classList.contains("expanded");
       sections.forEach(function (s) {
