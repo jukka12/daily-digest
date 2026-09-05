@@ -147,10 +147,14 @@
     font-size: 0.95rem;
   }
   #content h1 { display: none; }
-  #content > p:first-of-type {
+  #content .run-meta {
+    margin-top: 2rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
     color: var(--muted);
-    font-size: 0.95rem;
-    margin-top: 0;
+    font-size: 0.78rem;
+    opacity: 0.85;
+    font-weight: normal;
   }
   #content h2 {
     font-family: Fraunces, Georgia, serif;
@@ -263,11 +267,79 @@
         if (/^https?:/i.test(href)) a.setAttribute('rel', 'noopener noreferrer');
       });
     }
+    function translateStatus(s) {
+      if (!s) return "valmis";
+      var lower = String(s).trim().toLowerCase();
+      if (lower === "ready" || lower === "valmis") return "valmis";
+      return String(s).trim();
+    }
+
+    function translateWindow(w) {
+      if (!w) return "";
+      return String(w)
+        .replace(/mail last 24\s*h/gi, "posti viimeiset 24 h")
+        .replace(/\bcalendar\b/gi, "kalenteri")
+        .replace(/Radar since/gi, "Radar alkaen");
+    }
+
+    function parseRunMeta(text) {
+      var lines = String(text).split(/\r?\n/);
+      var meta = { status: null, updated: null, window: null };
+      var body = [];
+      var keyRe = /^(status|updated|window|tila|päivitetty|ikkuna)\s*:\s*(.*)$/i;
+      for (var i = 0; i < lines.length; i++) {
+        var raw = lines[i];
+        var trimmed = raw.trim();
+        if (
+          trimmed &&
+          /tila\s*:/i.test(trimmed) &&
+          /päivitetty/i.test(trimmed) &&
+          trimmed.indexOf("\u00b7") !== -1
+        ) {
+          var tilaM = trimmed.match(/tila\s*:\s*([^·]+)/i);
+          var paivM = trimmed.match(/päivitetty\s*:?\s*([^·]+)/i);
+          var ikkM = trimmed.match(/ikkuna\s*:\s*(.+)$/i);
+          if (tilaM) meta.status = tilaM[1].trim();
+          if (paivM) meta.updated = paivM[1].trim();
+          if (ikkM) meta.window = ikkM[1].trim();
+          continue;
+        }
+        var m = trimmed.match(keyRe);
+        if (m) {
+          var key = m[1].toLowerCase();
+          var val = (m[2] || "").trim();
+          if (key === "status" || key === "tila") meta.status = val;
+          else if (key === "updated" || key === "päivitetty") meta.updated = val;
+          else if (key === "window" || key === "ikkuna") meta.window = val;
+          continue;
+        }
+        body.push(raw);
+      }
+      var bodyText = body.join("\n").replace(/\n{3,}/g, "\n\n").replace(/^\n+/, "").replace(/\n+$/, "\n");
+      return { body: bodyText, meta: meta };
+    }
+
+    function buildFinnishFooter(meta) {
+      if (!meta || (!meta.status && !meta.updated && !meta.window)) return null;
+      var parts = ["tila: " + translateStatus(meta.status || "ready")];
+      if (meta.updated) parts.push("päivitetty " + String(meta.updated).trim());
+      if (meta.window) parts.push("ikkuna: " + translateWindow(meta.window));
+      return parts.join(" · ");
+    }
+
     fetch('digest.md', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.text(); })
       .then(t => {
+        const parsed = parseRunMeta(t);
         const el = document.getElementById('content');
-        el.innerHTML = marked.parse(t);
+        el.innerHTML = marked.parse(parsed.body);
+        const footer = buildFinnishFooter(parsed.meta);
+        if (footer) {
+          const p = document.createElement('p');
+          p.className = 'run-meta';
+          p.textContent = footer;
+          el.appendChild(p);
+        }
         stylizeLinks(el);
       })
       .catch(e => {
