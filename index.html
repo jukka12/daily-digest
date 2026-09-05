@@ -209,13 +209,14 @@ a.section-head:hover { background: var(--msg-hover); text-decoration: none !impo
   border-radius: 8px;
   color: var(--ink);
   text-decoration: none !important;
-  font-size: 14.5px;
-  line-height: 1.45;
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 a.item-row { color: var(--ink); cursor: pointer; }
 a.item-row:hover, .item-row:hover { background: var(--msg-hover); text-decoration: none !important; }
-.item-row .sub { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; font-weight: 400; }
-.item-row strong { font-weight: 600; }
+.item-row .sub { display: block; margin-top: 2px; color: var(--muted); font-size: 14px; font-weight: 500; }
+.item-row strong { font-weight: 700; }
 a, #content a { color: var(--accent); text-decoration: none; }
 a:hover { opacity: .9; }
 a.item-row, #content a.item-row,
@@ -426,11 +427,13 @@ html[data-style="admin"] .section-block.admin-card.expanded .sec-unit {
 }
 html[data-style="admin"] .section-block.admin-card .item-list { gap: 0; }
 html[data-style="admin"] .section-block.admin-card .item-row {
-  padding: 10px 4px;
+  padding: 11px 4px;
   border-radius: 0;
   border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
   color: inherit;
   background: transparent !important;
+  font-size: 16px;
+  font-weight: 550;
 }
 html[data-style="admin"] .section-block.admin-card .item-list .item-row:last-child { border-bottom: 0; }
 html[data-style="admin"] .section-block.admin-card .item-row:hover {
