@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <title>Daily Digest</title>
 <script>
-(function(){try{var s=localStorage.getItem("dd-theme");var t=s||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","light");}})();
+(function(){try{var s=localStorage.getItem("dd-theme");var t=s||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);var st=localStorage.getItem("dd-style")||"chat";document.documentElement.setAttribute("data-style",st==="admin"?"admin":"chat");}catch(e){document.documentElement.setAttribute("data-theme","light");document.documentElement.setAttribute("data-style","chat");}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,6 +187,159 @@ a:hover { opacity: .9; }
   .sidebar { display: none; }
 }
 
+
+/* —— Style switch (top right) —— */
+.topbar {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  padding: 10px 16px 0; flex: 0 0 auto;
+}
+.style-toggle {
+  border: 1px solid var(--border);
+  background: var(--msg-bg);
+  color: var(--ink);
+  font: inherit; font-size: 12px; font-weight: 600;
+  padding: 7px 12px; border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+.style-toggle:hover { opacity: .9; }
+.kpi-strip { display: none; }
+
+/* —— Admin Dashboard UI (alternate; chat layout preserved) —— */
+html[data-style="admin"] {
+  --admin-bg: #f1f5f9;
+  --admin-card: #ffffff;
+  --admin-ink: #0f172a;
+  --admin-muted: #64748b;
+  --admin-border: #e2e8f0;
+  --admin-indigo: #4f46e5;
+  --admin-violet: #7c3aed;
+  --admin-teal: #0d9488;
+  --admin-amber: #f59e0b;
+  --admin-rose: #e11d48;
+}
+html[data-style="admin"][data-theme="dark"] {
+  --admin-bg: #0b1220;
+  --admin-card: #111827;
+  --admin-ink: #f8fafc;
+  --admin-muted: #94a3b8;
+  --admin-border: #1f2a3d;
+}
+html[data-style="admin"] body {
+  background: var(--admin-bg);
+  color: var(--admin-ink);
+}
+html[data-style="admin"] .app { background: var(--admin-bg); }
+html[data-style="admin"] .rail {
+  background: linear-gradient(180deg, #312e81 0%, #1e1b4b 100%);
+}
+html[data-style="admin"] .rail-mark {
+  background: linear-gradient(135deg, #818cf8, #c084fc);
+}
+html[data-style="admin"] .sidebar {
+  background: var(--admin-card);
+  color: var(--admin-ink);
+  border-right: 1px solid var(--admin-border);
+}
+html[data-style="admin"] .sidebar h1 { color: var(--admin-ink); }
+html[data-style="admin"] .sidebar .lede,
+html[data-style="admin"] .nav-label { color: var(--admin-muted); }
+html[data-style="admin"] .nav-item {
+  color: var(--admin-ink);
+  border-radius: 10px;
+}
+html[data-style="admin"] .nav-item:hover { background: color-mix(in srgb, var(--admin-indigo) 8%, transparent); }
+html[data-style="admin"] .nav-item.active {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+}
+html[data-style="admin"] .main { background: var(--admin-bg); }
+html[data-style="admin"] .thread { padding: 8px 0 32px; }
+html[data-style="admin"] #content {
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 0 18px 18px;
+}
+html[data-style="admin"] .kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 4px 0 8px;
+}
+html[data-style="admin"] .kpi {
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .04);
+  min-height: 92px;
+}
+html[data-style="admin"] .kpi.hero {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(79, 70, 229, .35);
+}
+html[data-style="admin"] .kpi .kpi-label {
+  font-size: 12px; font-weight: 600; opacity: .85; margin-bottom: 6px;
+}
+html[data-style="admin"] .kpi .kpi-value {
+  font-size: 28px; font-weight: 750; letter-spacing: -0.03em; line-height: 1.1;
+}
+html[data-style="admin"] .kpi .kpi-sub {
+  margin-top: 6px; font-size: 12px; opacity: .8;
+}
+html[data-style="admin"] .kpi:not(.hero) .kpi-value { color: var(--admin-ink); }
+html[data-style="admin"] .kpi:not(.hero) .kpi-label,
+html[data-style="admin"] .kpi:not(.hero) .kpi-sub { color: var(--admin-muted); }
+html[data-style="admin"] .section-block {
+  margin: 0;
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 16px;
+  padding: 14px 14px 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .04);
+}
+html[data-style="admin"] .section-head {
+  margin: 0 0 10px;
+  padding: 4px 4px 12px;
+  border-bottom: 1px solid var(--admin-border);
+}
+html[data-style="admin"] .section-head h2 {
+  font-size: 15px;
+  color: var(--admin-ink);
+}
+html[data-style="admin"] .item-list { gap: 0; }
+html[data-style="admin"] .item-row {
+  padding: 11px 10px;
+  border-radius: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--admin-border) 80%, transparent);
+  color: var(--admin-ink);
+}
+html[data-style="admin"] .item-list .item-row:last-child { border-bottom: 0; }
+html[data-style="admin"] .item-row:hover {
+  background: color-mix(in srgb, var(--admin-indigo) 6%, transparent);
+}
+html[data-style="admin"] .item-row .sub { color: var(--admin-muted); }
+html[data-style="admin"] .status-foot {
+  border-top: 1px solid var(--admin-border);
+  color: var(--admin-muted);
+  background: transparent;
+}
+html[data-style="admin"] .style-toggle {
+  border-color: var(--admin-border);
+  background: var(--admin-card);
+  color: var(--admin-ink);
+}
+@media (max-width: 900px) {
+  html[data-style="admin"] .kpi-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  html[data-style="admin"] .kpi-strip { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -205,6 +358,9 @@ a:hover { opacity: .9; }
       <div id="nav"></div>
     </nav>
     <main class="main">
+      <div class="topbar">
+        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Chat / Admin">Admin</button>
+      </div>
       <div id="err"></div>
       <div class="thread"><article id="content"></article></div>
       <footer class="status-foot" aria-label="Tila">
@@ -229,6 +385,26 @@ a:hover { opacity: .9; }
     setTheme(current() === 'dark' ? 'light' : 'dark');
   });
   setTheme(current());
+})();
+
+(function () {
+  var btn = document.getElementById("styleToggle");
+  function currentStyle() {
+    return document.documentElement.getAttribute("data-style") === "admin" ? "admin" : "chat";
+  }
+  function setStyle(style) {
+    var s = style === "admin" ? "admin" : "chat";
+    document.documentElement.setAttribute("data-style", s);
+    try { localStorage.setItem("dd-style", s); } catch (e) {}
+    btn.textContent = s === "admin" ? "Chat" : "Admin";
+    btn.setAttribute("aria-label", s === "admin" ? "Vaihda chat-tyyliin" : "Vaihda admin-dashboard -tyyliin");
+    btn.title = s === "admin" ? "Chat App UI" : "Admin Dashboard UI";
+    if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
+  }
+  btn.addEventListener("click", function () {
+    setStyle(currentStyle() === "admin" ? "chat" : "admin");
+  });
+  setStyle(currentStyle());
 })();
 
 function translateStatus(s) {
@@ -473,12 +649,39 @@ function renderChat(root, markdownHtml) {
   root.appendChild(frag);
 }
 
+
+function refreshAdminKpis() {
+  var content = document.getElementById("content");
+  if (!content) return;
+  var old = content.querySelector(".kpi-strip");
+  if (old) old.remove();
+  if (document.documentElement.getAttribute("data-style") !== "admin") return;
+  var sections = Array.from(content.querySelectorAll(".section-block"));
+  if (!sections.length) return;
+  var strip = document.createElement("div");
+  strip.className = "kpi-strip";
+  sections.forEach(function (sec, idx) {
+    var titleEl = sec.querySelector(".section-head h2");
+    var title = titleEl ? titleEl.textContent.trim() : ("Osio " + (idx + 1));
+    var count = sec.querySelectorAll(".item-row").length;
+    var card = document.createElement("div");
+    card.className = "kpi" + (idx === 0 ? " hero" : "");
+    card.innerHTML = '<div class="kpi-label">' + title + '</div>' +
+      '<div class="kpi-value">' + count + '</div>' +
+      '<div class="kpi-sub">riviä digestiessä</div>';
+    strip.appendChild(card);
+  });
+  content.insertBefore(strip, content.firstChild);
+}
+window.refreshAdminKpis = refreshAdminKpis;
+
 fetch("digest.md", { cache: "no-store" })
   .then(function (r) { if (!r.ok) throw new Error(r.status + " " + r.statusText); return r.text(); })
   .then(function (t) {
     var parsed = parseRunMeta(t);
     var el = document.getElementById("content");
     renderChat(el, marked.parse(parsed.body));
+    refreshAdminKpis();
     var footer = buildFinnishFooter(parsed.meta);
     document.getElementById("footMeta").textContent = footer || "valmis";
   })
