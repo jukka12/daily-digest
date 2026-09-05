@@ -212,6 +212,20 @@ a.section-head:hover { background: var(--msg-hover); text-decoration: none !impo
   font-size: 15.5px;
   font-weight: 500;
   line-height: 1.5;
+  touch-action: pan-y;
+  transition: transform .2s ease, opacity .2s ease, max-height .25s ease, padding .2s ease, margin .2s ease, border .2s ease;
+  will-change: transform;
+}
+.item-row.swiping { transition: none; }
+.item-row.dismissing {
+  opacity: 0;
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+  border-width: 0 !important;
+  overflow: hidden;
+  pointer-events: none;
 }
 a.item-row { color: var(--ink); cursor: pointer; }
 a.item-row:hover, .item-row:hover { background: var(--msg-hover); text-decoration: none !important; }
@@ -611,6 +625,100 @@ function sectionKind(title) {
   return "mail";
 }
 
+function dismissDayKey() {
+  try {
+    return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Helsinki" });
+  } catch (e) {
+    return new Date().toISOString().slice(0, 10);
+  }
+}
+function dismissStore() {
+  try {
+    return JSON.parse(localStorage.getItem("dd-dismissed") || "{}") || {};
+  } catch (e) { return {}; }
+}
+function saveDismissStore(store) {
+  try { localStorage.setItem("dd-dismissed", JSON.stringify(store)); } catch (e) {}
+}
+function rowDismissKey(kind, row) {
+  var text = ((row && row.textContent) || "").replace(/\s+/g, " ").trim();
+  return dismissDayKey() + "|" + (kind || "x") + "|" + text;
+}
+function isRowDismissed(kind, row) {
+  return !!dismissStore()[rowDismissKey(kind, row)];
+}
+function markRowDismissed(kind, row) {
+  var store = dismissStore();
+  store[rowDismissKey(kind, row)] = 1;
+  // drop keys from other days
+  var day = dismissDayKey() + "|";
+  Object.keys(store).forEach(function (k) {
+    if (k.indexOf(day) !== 0) delete store[k];
+  });
+  saveDismissStore(store);
+}
+function enableSwipeDismiss(row, kind) {
+  if (!row || row.dataset.swipeBound) return;
+  row.dataset.swipeBound = "1";
+  row.dataset.kind = kind || "";
+  var startX = 0, startY = 0, dx = 0, active = false, locked = false;
+  function onStart(x, y) {
+    startX = x; startY = y; dx = 0; active = true; locked = false;
+    row.classList.add("swiping");
+  }
+  function onMove(x, y) {
+    if (!active) return;
+    var adx = x - startX;
+    var ady = y - startY;
+    if (!locked) {
+      if (Math.abs(ady) > 8 && Math.abs(ady) > Math.abs(adx)) {
+        active = false;
+        row.classList.remove("swiping");
+        row.style.transform = "";
+        return;
+      }
+      if (Math.abs(adx) > 8) locked = true;
+    }
+    if (!locked) return;
+    dx = adx;
+    // only swipe left to dismiss
+    var t = Math.min(0, dx);
+    row.style.transform = "translateX(" + t + "px)";
+    row.style.opacity = String(Math.max(0.25, 1 + t / 180));
+  }
+  function onEnd() {
+    if (!active && !locked) {
+      row.classList.remove("swiping");
+      return;
+    }
+    active = false;
+    row.classList.remove("swiping");
+    if (dx < -72) {
+      markRowDismissed(kind, row);
+      row.style.transform = "translateX(-120%)";
+      row.classList.add("dismissing");
+      setTimeout(function () {
+        if (row.parentNode) row.parentNode.removeChild(row);
+        if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
+      }, 220);
+    } else {
+      row.style.transform = "";
+      row.style.opacity = "";
+    }
+    dx = 0;
+  }
+  row.addEventListener("touchstart", function (e) {
+    if (!e.touches || !e.touches[0]) return;
+    onStart(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  row.addEventListener("touchmove", function (e) {
+    if (!e.touches || !e.touches[0]) return;
+    onMove(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  row.addEventListener("touchend", onEnd);
+  row.addEventListener("touchcancel", onEnd);
+}
+
 function extractHref(el) {
   var a = el.querySelector && el.querySelector("a[href]");
   if (a) return a.getAttribute("href");
@@ -640,7 +748,11 @@ function buildItemRows(container, kind) {
           else { var s = document.createElement("span"); s.innerHTML = a.innerHTML; a.replaceWith(s); }
         });
         row.innerHTML = c.innerHTML.replace(/^<p>/i, "").replace(/<\/p>$/i, "");
-        if ((row.textContent || "").trim()) list.appendChild(row);
+        if ((row.textContent || "").trim()) {
+          if (isRowDismissed(kind, row)) return;
+          enableSwipeDismiss(row, kind);
+          list.appendChild(row);
+        }
       }
     });
     return list;
@@ -684,6 +796,8 @@ function buildItemRows(container, kind) {
     var html = chunks[0];
     for (var i = 1; i < chunks.length; i++) html += '<span class="sub">' + chunks[i] + "</span>";
     row.innerHTML = html;
+    if (isRowDismissed(kind, row)) return;
+    enableSwipeDismiss(row, kind);
     list.appendChild(row);
   });
   return list;
@@ -814,7 +928,7 @@ function refreshAdminKpis() {
     var kind = sec.getAttribute("data-kind") || "mail";
     var head = sec.querySelector(".section-head");
     if (!head) return;
-    var count = sec.querySelectorAll(".item-row").length;
+    var count = sec.querySelectorAll(".item-row:not(.dismissing)").length;
     sec.classList.add("admin-card", "tone-" + kind);
     var countEl = document.createElement("span");
     countEl.className = "sec-count";
