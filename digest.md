@@ -17,7 +17,15 @@
 
 ## Kalenteri
 
-(empty)
+(tänään + 48 h tyhjä — seuraavat 3)
+
+1. **9.9** — SPCX Unlock: Day 90 (~319M shares)
+   https://www.google.com/calendar/event?eid=MGxhYmY2NmltbGN0Z3BubGsyazZtMHI1azAganVra2EueWxvbmVuQG0&ctz=Europe/Helsinki
+2. **10.9** — SPCX Unlock: Separate tranche (~59M shares)
+   https://www.google.com/calendar/event?eid=YmdoaDVsajdmN2txNmU3bTFodWk1MjlraGcganVra2EueWxvbmVuQG0&ctz=Europe/Helsinki
+3. **24.9** — SPCX Unlock: Day 105 (~328M shares)
+   https://www.google.com/calendar/event?eid=ZzNlOTIzMm5kaWg4aDduYnVjaDdhbzk2N2cganVra2EueWxvbmVuQG0&ctz=Europe/Helsinki
+
 
 ## Uutiset:
 
@@ -64,4 +72,4 @@
    5.9 02:04
 
 
-tila: valmis · päivitetty 5.9 20:07 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri 5.9–7.9; Youtube tilaukset 5.9 00:01 alkaen
+tila: valmis · päivitetty 5.9 20:55 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri seuraavat (9.9–); Youtube tilaukset 5.9 00:01 alkaen
