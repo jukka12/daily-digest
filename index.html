@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <title>Daily Digest</title>
 <script>
-(function(){try{var s=localStorage.getItem("dd-theme");var t=s||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);var st=localStorage.getItem("dd-style")||"chat";document.documentElement.setAttribute("data-style",st==="admin"?"admin":"chat");}catch(e){document.documentElement.setAttribute("data-theme","light");document.documentElement.setAttribute("data-style","chat");}})();
+(function(){try{var s=localStorage.getItem("dd-theme");var t=s||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);var st=localStorage.getItem("dd-style")||"chat";var sty=st==="admin"?"admin":"chat";document.documentElement.setAttribute("data-style",sty);document.documentElement.classList.toggle("dd-admin",sty==="admin");document.documentElement.classList.toggle("dd-chat",sty==="chat");}catch(e){document.documentElement.setAttribute("data-theme","light");document.documentElement.setAttribute("data-style","chat");document.documentElement.classList.add("dd-chat");document.documentElement.classList.remove("dd-admin");}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -488,6 +488,94 @@ html[data-style="admin"] .status-foot {
   html[data-style="admin"] #content { grid-template-columns: 1fr; }
 }
 
+/* Explicit Chat resets — Mac desktop keeps sidebar visible; admin styles must not linger */
+html[data-style="chat"] body,
+html[data-style="chat"] .app,
+html[data-style="chat"] .main {
+  background: var(--msg-bg) !important;
+  color: var(--ink) !important;
+}
+html[data-style="chat"] .rail {
+  background: var(--rail) !important;
+}
+html[data-style="chat"] .rail-mark {
+  background: var(--accent) !important;
+}
+html[data-style="chat"] .sidebar {
+  display: flex !important;
+  width: 220px !important;
+  flex: 0 0 220px !important;
+  background: var(--sidebar) !important;
+  color: var(--sidebar-text) !important;
+  border-right: 1px solid rgba(255,255,255,.04) !important;
+}
+html[data-style="chat"] .sidebar h1 { color: #fff !important; }
+html[data-style="chat"] .sidebar .lede,
+html[data-style="chat"] .nav-label { color: var(--sidebar-muted) !important; }
+html[data-style="chat"] .nav-item {
+  color: var(--sidebar-text) !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+}
+html[data-style="chat"] .nav-item:hover { background: var(--sidebar-hover) !important; }
+html[data-style="chat"] .nav-item.active {
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+html[data-style="chat"] #content {
+  display: block !important;
+  max-width: 52rem !important;
+  margin: 0 auto !important;
+  padding: 0 18px !important;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+}
+html[data-style="chat"] .section-block {
+  margin: 18px 0 28px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  color: var(--ink) !important;
+}
+html[data-style="chat"] .section-head {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 0 8px !important;
+  padding: 4px 6px !important;
+  border-bottom: 0 !important;
+  cursor: default !important;
+}
+html[data-style="chat"] .section-head h2 {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  clip: auto !important;
+  overflow: visible !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+}
+html[data-style="chat"] .sec-count,
+html[data-style="chat"] .sec-unit { display: none !important; }
+html[data-style="chat"] .item-list { display: flex !important; }
+html[data-style="chat"] .item-row {
+  color: var(--ink) !important;
+  background: transparent !important;
+}
+@media (max-width: 820px) {
+  html[data-style="chat"] .sidebar { width: 160px !important; flex-basis: 160px !important; }
+}
+@media (max-width: 640px) {
+  html[data-style="chat"] .sidebar { display: none !important; }
+  html[data-style="admin"] .sidebar { display: none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -556,12 +644,30 @@ html[data-style="admin"] .status-foot {
   }
   function setStyle(style) {
     var s = style === "admin" ? "admin" : "chat";
-    document.documentElement.setAttribute("data-style", s);
+    var root = document.documentElement;
+    root.setAttribute("data-style", s);
+    root.classList.toggle("dd-admin", s === "admin");
+    root.classList.toggle("dd-chat", s === "chat");
     try { localStorage.setItem("dd-style", s); } catch (e) {}
     btn.textContent = s === "admin" ? "Chat" : "Admin";
     btn.setAttribute("aria-label", s === "admin" ? "Vaihda chat-tyyliin" : "Vaihda admin-dashboard -tyyliin");
     btn.title = s === "admin" ? "Chat App UI" : "Admin Dashboard UI";
+    // Force layout refresh (helps Brave desktop keep attribute-driven CSS in sync)
+    void root.offsetHeight;
     if (typeof window.refreshAdminKpis === "function") window.refreshAdminKpis();
+    if (s === "chat") {
+      document.querySelectorAll(".section-block").forEach(function (sec) {
+        sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
+        sec.style.cssText = "";
+        var head = sec.querySelector(".section-head");
+        if (head) {
+          head.style.cssText = "";
+          head.onclick = null;
+          head.removeAttribute("role");
+          head.removeAttribute("aria-expanded");
+        }
+      });
+    }
   }
   btn.addEventListener("click", function () {
     setStyle(currentStyle() === "admin" ? "chat" : "admin");
