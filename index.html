@@ -209,8 +209,8 @@ a.section-head:hover { background: var(--msg-hover); text-decoration: none !impo
   border-radius: 8px;
   color: var(--ink);
   text-decoration: none !important;
-  font-size: 15.5px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1.5;
   touch-action: pan-y;
   transition: transform .2s ease, opacity .2s ease, max-height .25s ease, padding .2s ease, margin .2s ease, border .2s ease;
@@ -227,10 +227,20 @@ a.section-head:hover { background: var(--msg-hover); text-decoration: none !impo
   overflow: hidden;
   pointer-events: none;
 }
-a.item-row { color: var(--ink); cursor: pointer; }
+a.item-row { color: var(--ink); cursor: pointer; font-size: inherit; font-weight: inherit; }
 a.item-row:hover, .item-row:hover { background: var(--msg-hover); text-decoration: none !important; }
-.item-row .sub { display: block; margin-top: 2px; color: var(--muted); font-size: 14px; font-weight: 500; }
-.item-row strong { font-weight: 700; }
+.item-row .sub {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 600;
+}
+.item-row strong,
+.item-row b {
+  font-weight: 600;
+  font-size: inherit;
+}
 a, #content a { color: var(--accent); text-decoration: none; }
 a:hover { opacity: .9; }
 a.item-row, #content a.item-row,
@@ -445,7 +455,17 @@ html[data-style="admin"] .section-block.admin-card .item-row {
   color: inherit;
   background: transparent !important;
   font-size: 16px;
-  font-weight: 550;
+  font-weight: 600;
+}
+html[data-style="admin"] .section-block.admin-card a.item-row {
+  font-size: 16px;
+  font-weight: 600;
+}
+html[data-style="admin"] .section-block.admin-card .item-row .sub,
+html[data-style="admin"] .section-block.admin-card .item-row strong,
+html[data-style="admin"] .section-block.admin-card .item-row b {
+  font-size: 16px;
+  font-weight: 600;
 }
 html[data-style="admin"] .section-block.admin-card .item-list .item-row:last-child { border-bottom: 0; }
 html[data-style="admin"] .section-block.admin-card .item-row:hover {
