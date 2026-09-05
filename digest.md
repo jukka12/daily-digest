@@ -1,9 +1,5 @@
 # Digest
 
-status: ready
-updated: 5.9 16:47
-window: mail last 24h; calendar 5.9–7.9; Radar since 5.9 07:42
-
 ## 1) Needs you
 
 1. **Coinbase** — Tervetuloa Developer Platformiin; varmista että rekisteröidyit itse.
@@ -42,3 +38,5 @@ window: mail last 24h; calendar 5.9–7.9; Radar since 5.9 07:42
 1. [tesla.com/robotaxi](https://www.tesla.com/robotaxi) — seuraava muutos kaupungeissa, hinnassa tai Cybercab-hailissa.
 2. [spacex.com/launches](https://www.spacex.com/launches) — seuraava listattu: Starlink Falcon 9 SLC-4E 6.9. 03:59–07:59 PT; ikkunan siirto muuttaa tilanteen.
 3. [ir.tesla.com](https://ir.tesla.com) — Access Denied; uusi tulos- tai tiedotepäivä muuttaa IR-kuvan.
+
+tila: valmis · päivitetty 5.9 16:47 · ikkuna: posti viimeiset 24 h; kalenteri 5.9–7.9; Radar alkaen 5.9 07:42
