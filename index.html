@@ -295,8 +295,9 @@ var ICONS = {
 };
 
 var APP_LINKS = {
-  mail: "message://",
-  calendar: "calshow:"
+  /* https inbox/calendar — Mac Mail rejects bare message scheme (error 1030) */
+  mail: "https://mail.google.com/mail/u/0/#inbox",
+  calendar: "https://calendar.google.com/calendar/"
 };
 
 function sectionKind(title) {
@@ -419,11 +420,9 @@ function renderChat(root, markdownHtml) {
       head.className = "section-head";
       if (appHref) {
         head.href = appHref;
-        head.setAttribute("title", kind === "mail" ? "Avaa Mail" : "Avaa Calendar");
-        head.addEventListener("click", function (e) {
-          /* Keep native handoff; also assign so iOS opens the app reliably */
-          try { window.location.assign(appHref); } catch (err) {}
-        });
+        head.setAttribute("title", kind === "mail" ? "Avaa Gmail" : "Avaa Google Calendar");
+        head.target = "_blank";
+        head.rel = "noopener noreferrer";
       }
       var icon = document.createElement("span");
       icon.className = "app-icon";
