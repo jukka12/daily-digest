@@ -159,7 +159,7 @@ html[data-theme="dark"] .theme-toggle.xd .icon-moon { display: block; }
 .sidebar-resizer {
   position: absolute;
   top: 0; right: 0;
-  width: 6px; height: 100%;
+  width: 8px; height: 100%;
   cursor: col-resize;
   z-index: 5;
   background: transparent;
@@ -168,6 +168,33 @@ html[data-theme="dark"] .theme-toggle.xd .icon-moon { display: block; }
 .sidebar-resizer.dragging {
   background: color-mix(in srgb, var(--accent) 45%, transparent);
 }
+.sidebar-collapse-btn {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  z-index: 6;
+  width: 28px;
+  height: 28px;
+  border: 1px solid color-mix(in srgb, var(--sidebar-text) 25%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sidebar) 80%, #000);
+  color: var(--sidebar-text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  line-height: 1;
+  font-size: 14px;
+}
+.sidebar-collapse-btn:hover { opacity: 0.9; background: var(--sidebar-hover); }
+.sidebar.collapsed .sidebar-collapse-btn {
+  right: 50%;
+  transform: translateX(50%);
+}
+html[data-style="admin"] .sidebar-collapse-btn { display: none !important; }
+.sidebar { padding-top: 44px; }
+.sidebar.collapsed { padding-top: 48px; }
+
 .nav-item .nav-ico {
   width: 22px; height: 22px; flex: 0 0 22px;
   border-radius: 6px; overflow: hidden;
@@ -631,6 +658,7 @@ html[data-style="chat"] .sec-unit { display: none !important; }
     </aside>
     <nav class="sidebar" id="chatSidebar" aria-label="Osiot">
       <div class="sidebar-resizer" id="sidebarResizer" title="Säädä leveyttä" aria-hidden="true"></div>
+      <button type="button" class="sidebar-collapse-btn" id="sidebarCollapseBtn" title="Kutista / laajenna" aria-label="Kutista tai laajenna sivupalkki">‹</button>
       <h1>Daily Digest</h1>
       <p class="lede">Posti, kalenteri, X ja Youtube — yksi aamuraportti.</p>
       <div class="nav-label">Kanavat</div>
@@ -759,41 +787,80 @@ html[data-style="chat"] .sec-unit { display: none !important; }
 (function () {
   var side = document.getElementById("chatSidebar");
   var handle = document.getElementById("sidebarResizer");
+  var toggle = document.getElementById("sidebarCollapseBtn");
   if (!side || !handle) return;
-  var MIN = 64, MAX = 360, COLLAPSE = 96;
+  var MIN = 64, MAX = 360, COLLAPSE = 96, EXPANDED = 220, NARROW = 72;
+  function syncToggle(px) {
+    if (!toggle) return;
+    var collapsed = px <= COLLAPSE;
+    toggle.textContent = collapsed ? "›" : "‹";
+    toggle.title = collapsed ? "Laajenna sivupalkki" : "Kutista sivupalkki";
+    toggle.setAttribute("aria-label", toggle.title);
+  }
   function applyWidth(px) {
     px = Math.max(MIN, Math.min(MAX, px));
     side.style.setProperty("width", px + "px", "important");
     side.style.setProperty("flex-basis", px + "px", "important");
     side.classList.toggle("collapsed", px <= COLLAPSE);
+    syncToggle(px);
     try { localStorage.setItem("dd-sidebar-width", String(px)); } catch (e) {}
   }
+  window.__ddApplySidebarWidth = applyWidth;
   try {
-    var saved = parseInt(localStorage.getItem("dd-sidebar-width") || "220", 10);
+    var saved = parseInt(localStorage.getItem("dd-sidebar-width") || String(EXPANDED), 10);
     if (!isNaN(saved)) applyWidth(saved);
-  } catch (e) {}
+  } catch (e) { applyWidth(EXPANDED); }
+  if (toggle) {
+    toggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (document.documentElement.getAttribute("data-style") === "admin") return;
+      var w = side.getBoundingClientRect().width;
+      if (w <= COLLAPSE) {
+        var prev = EXPANDED;
+        try {
+          var p = parseInt(localStorage.getItem("dd-sidebar-expanded") || String(EXPANDED), 10);
+          if (!isNaN(p) && p > COLLAPSE) prev = p;
+        } catch (err) {}
+        applyWidth(prev);
+      } else {
+        try { localStorage.setItem("dd-sidebar-expanded", String(Math.round(w))); } catch (err) {}
+        applyWidth(NARROW);
+      }
+    });
+  }
   var dragging = false, startX = 0, startW = 0;
-  handle.addEventListener("pointerdown", function (e) {
+  function onDown(e) {
     if (document.documentElement.getAttribute("data-style") === "admin") return;
     dragging = true;
     startX = e.clientX;
     startW = side.getBoundingClientRect().width;
     handle.classList.add("dragging");
-    handle.setPointerCapture(e.pointerId);
     e.preventDefault();
-  });
-  handle.addEventListener("pointermove", function (e) {
+  }
+  function onMove(e) {
     if (!dragging) return;
     applyWidth(startW + (e.clientX - startX));
-  });
-  function endDrag(e) {
+  }
+  function onUp() {
     if (!dragging) return;
     dragging = false;
     handle.classList.remove("dragging");
-    try { handle.releasePointerCapture(e.pointerId); } catch (err) {}
   }
-  handle.addEventListener("pointerup", endDrag);
-  handle.addEventListener("pointercancel", endDrag);
+  handle.addEventListener("mousedown", onDown);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onUp);
+  handle.addEventListener("pointerdown", function (e) {
+    if (e.pointerType === "mouse") return;
+    onDown(e);
+    try { handle.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  handle.addEventListener("pointermove", function (e) {
+    if (e.pointerType === "mouse") return;
+    onMove(e);
+  });
+  handle.addEventListener("pointerup", onUp);
+  handle.addEventListener("pointercancel", onUp);
 })();
 
 function translateStatus(s) {
