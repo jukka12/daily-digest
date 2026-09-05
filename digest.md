@@ -6,12 +6,10 @@ window: mail last 24h; calendar 5.9–7.9; Radar since 4.9 07:38
 
 ## 1) Needs you
 
-1. **Elsi Mäkinen, OP** (`elsi.makinen@op.fi`) — VS: Toivomukseni 11.9. tehtävään jakoon
-   Pankki laatii jakokirjan osakkaiden sopimuksen mukaan. Muutokset ilmoitettava ennen 11.9.; luonnoksella mennään jos kaikki ok. Lunastus pesän ulkopuolisilla varoilla → varainsiirtovero.
+1. **Elsi Mäkinen, OP** — Pankki laatii jakokirjan osakkaiden sopimuksen mukaan. Muutokset ennen 11.9.; muuten mennään luonnoksella. Lunastus pesän ulkopuolisilla varoilla tuo varainsiirtoveron.
    https://mail.google.com/mail/#all/1a067ec269804f22
 
-2. **CleanShot Cloud** (`account@cleanshot.cloud`) — Your CleanShot Cloud password was changed
-   Salasana vaihdettu 4.9 (reset + kuitti $23.85). Varmista että se olit sinä.
+2. **CleanShot Cloud** — Salasana vaihdettiin 4.9 (uudelleenasetus + kuitti 23,85 $). Varmista, että se olit sinä.
    https://outlook.live.com/owa/?ItemID=AQMkADAwATM0MDAAMS04YWNjAC0wNjA4LTAwAi0wMAoARgAAA4%2BWGodb%2FOhNrZs%2B282V87YHAKQownVqbNJApIOLC6OcjqAAAAIBCgAAAKQownVqbNJApIOLC6OcjqAACVIQ0VAAAAA%3D&exvsurl=1&viewmodel=ReadMessageItem
 
 ## 2) Calendar
@@ -62,8 +60,8 @@ window: mail last 24h; calendar 5.9–7.9; Radar since 4.9 07:38
 
 ## 5) When it matters
 
-1. OP / 11.9. jako — muutokset ennen 11.9.; luonnoksella mennään jos kaikki ok. Lunastus ulkopuolisilla varoilla → varainsiirtovero.
+1. OP / 11.9. jako — muutokset ennen 11.9.; muuten mennään luonnoksella. Lunastus ulkopuolisilla varoilla tuo varainsiirtoveron.
    https://mail.google.com/mail/#all/1a067ec269804f22
-2. CleanShot Cloud password change 4.9 — confirm it was you.
+2. CleanShot Cloud — salasana vaihdettiin 4.9; varmista, että se olit sinä.
    https://outlook.live.com/owa/?ItemID=AQMkADAwATM0MDAAMS04YWNjAC0wNjA4LTAwAi0wMAoARgAAA4%2BWGodb%2FOhNrZs%2B282V87YHAKQownVqbNJApIOLC6OcjqAAAAIBCgAAAKQownVqbNJApIOLC6OcjqAACVIQ0VAAAAA%3D&exvsurl=1&viewmodel=ReadMessageItem
 3. [ir.tesla.com](https://ir.tesla.com) down (Access Denied). robotaxi and launches unchanged vs yesterday; next launch still Starlink Falcon 9 SLC-4E 6.9. 03:59–07:59 PT on [spacex.com/launches](https://www.spacex.com/launches).
