@@ -141,7 +141,12 @@ html[data-theme="dark"] .icon-sun { display: none; }
 .section-head {
   display: flex; align-items: center; gap: 10px;
   margin: 0 0 8px; padding: 4px 6px;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none !important;
 }
+a.section-head { color: inherit; cursor: pointer; }
+a.section-head:hover { background: var(--msg-hover); text-decoration: none !important; opacity: 1; }
 .section-head h2 {
   margin: 0; font-size: 16px; font-weight: 700; color: var(--ink);
 }
@@ -289,6 +294,11 @@ var ICONS = {
   youtube: '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#FF0000"/><path fill="#fff" d="M40 32.5v35l30-17.5L40 32.5z"/></svg>'
 };
 
+var APP_LINKS = {
+  mail: "message://",
+  calendar: "calshow:"
+};
+
 function sectionKind(title) {
   var t = (title || "").toLowerCase();
   if (t.indexOf("sähkö") === 0 || t.indexOf("sahko") === 0 || t.indexOf("mail") === 0) return "mail";
@@ -404,8 +414,13 @@ function renderChat(root, markdownHtml) {
       var block = document.createElement("section");
       block.className = "section-block";
       block.id = id;
-      var head = document.createElement("div");
+      var appHref = APP_LINKS[kind] || null;
+      var head = document.createElement(appHref ? "a" : "div");
       head.className = "section-head";
+      if (appHref) {
+        head.href = appHref;
+        head.setAttribute("title", kind === "mail" ? "Avaa Mail" : "Avaa Calendar");
+      }
       var icon = document.createElement("span");
       icon.className = "app-icon";
       icon.innerHTML = ICONS[kind] || ICONS.mail;
