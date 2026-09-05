@@ -337,10 +337,6 @@ function renderChat(root, markdownHtml) {
       var av = document.createElement("div");
       av.className = "avatar c" + (color % 4);
       av.textContent = initials(title);
-      var right = document.createElement("div");
-      var head = document.createElement("div");
-      head.className = "msg-head";
-      head.innerHTML = "<span class=\"name\">" + title + "</span><span class=\"time\"></span>";
       var body = document.createElement("div");
       body.className = "msg-body";
       i += 1;
@@ -350,10 +346,8 @@ function renderChat(root, markdownHtml) {
         body.appendChild(n);
         i += 1;
       }
-      right.appendChild(head);
-      right.appendChild(body);
       msg.appendChild(av);
-      msg.appendChild(right);
+      msg.appendChild(body);
       block.appendChild(msg);
       frag.appendChild(block);
       (function (secId, secTitle) {
