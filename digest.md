@@ -17,8 +17,6 @@
 
 ## Kalenteri
 
-(tänään + 48 h tyhjä — seuraavat 3)
-
 1. **9.9** — SPCX Unlock: Day 90 (~319M shares)
    https://www.google.com/calendar/event?eid=MGxhYmY2NmltbGN0Z3BubGsyazZtMHI1azAganVra2EueWxvbmVuQG0&ctz=Europe/Helsinki
 2. **10.9** — SPCX Unlock: Separate tranche (~59M shares)
