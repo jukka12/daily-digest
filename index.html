@@ -611,7 +611,7 @@ html[data-style="chat"] .sec-unit { display: none !important; }
       <div id="err"></div>
       <div class="thread"><article id="content"></article></div>
       <footer class="style-foot" aria-label="Tyyli">
-        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Nykyinen: Chat (napsauta → Admin)">Chat</button>
+        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Nykyinen Chat — vaihda Adminiin">→ Admin</button>
         <span id="footChannel" hidden># kaikki</span>
         <span id="footMeta" hidden>Ladataan…</span>
       </footer>
@@ -679,9 +679,9 @@ html[data-style="chat"] .sec-unit { display: none !important; }
     root.classList.toggle("dd-chat", s === "chat");
     try { localStorage.setItem("dd-style", s); } catch (e) {}
     // Current theme name on the button
-    btn.textContent = s === "admin" ? "Admin" : "Chat";
-    btn.setAttribute("aria-label", s === "admin" ? "Nykyinen Admin (laatikot) — napsauta Chatiin" : "Nykyinen Chat (Kanavat-palkki) — napsauta Adminiin");
-    btn.title = s === "admin" ? "Admin: värilaatikot, ei sivupalkkia" : "Chat: tumma Kanavat-palkki";
+    btn.textContent = s === "admin" ? "→ Chat" : "→ Admin";
+    btn.setAttribute("aria-label", s === "admin" ? "Vaihda Chat-tyyliin" : "Vaihda Admin-tyyliin");
+    btn.title = s === "admin" ? "Nykyinen Admin — vaihda Chatiin" : "Nykyinen Chat — vaihda Adminiin";
     if (s === "chat") {
       stripAdminCards();
       applySidebarForStyle("chat");
