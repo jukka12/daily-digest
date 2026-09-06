@@ -35,17 +35,17 @@
 1. **Randy Kirk — Elon Predicts 90% Market Share for This**
    Market-share prediction clip.
    https://www.youtube.com/watch?v=7LE6uvLoRks
-   6.9 04:46
+   6.9 05:38
 
 2. **Anthony Rogers — THE TRINITY: A Biblical-Theological Unfolding of the Trinity in Creation and Redemption**
    Theology lecture.
    https://www.youtube.com/watch?v=7E2PfpG5URI
-   6.9 01:10
+   6.9 01:38
 
 3. **Randy Kirk — Cathie Wood from Ark Invest on Kevin Warsh, Inflation, Gold, Bitcoin, the Deficit and more**
    Cathie Wood / ARK interview clip.
    https://www.youtube.com/watch?v=ILUKNt9javI
-   6.9 00:10
+   6.9 00:38
 
 ## Summary
 
@@ -53,4 +53,4 @@
 2. **3.–4.9** — Lainhuuto käynnistetty ja maksettu; eteneminen luonnoksella; Elsi (OP) kuittaa osakkaat.
 3. **4.9** — Apple Hide My Email otettu käyttöön luma.comille.
 
-tila: valmis · päivitetty 6.9 07:39 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri seuraavat (9.9–); Youtube tilaukset 6.9 00:01 alkaen
+tila: valmis · päivitetty 6.9 07:40 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri seuraavat (9.9–); Youtube tilaukset 6.9 00:01 alkaen
