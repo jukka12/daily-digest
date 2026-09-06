@@ -733,7 +733,7 @@ html[data-style="chat"] .sec-unit { display: none !important; }
       <div class="thread"><article id="content"></article></div>
       <footer class="style-foot" aria-label="Sivun ala">
         <nav class="site-links" aria-label="Sivut">
-          <a href="https://jukka12.github.io/daily-digest/" aria-current="page">Daily Digest</a>
+          <a href="https://jukka12.github.io/daily-digest/" aria-current="page" id="ddSiteLink">D-Chat</a>
           <a href="https://jukka12.github.io/x-daily/">X-Daily</a>
           <a href="https://jukka12.github.io/fifo-vero/">Coinbase FIFO</a>
         </nav>
@@ -816,6 +816,8 @@ html[data-style="chat"] .sec-unit { display: none !important; }
     btn.textContent = s === "admin" ? "→ Chat" : "→ Admin";
     btn.setAttribute("aria-label", s === "admin" ? "Vaihda Chat-tyyliin" : "Vaihda Admin-tyyliin");
     btn.title = s === "admin" ? "Nykyinen Admin — vaihda Chatiin" : "Nykyinen Chat — vaihda Adminiin";
+    var site = document.getElementById("ddSiteLink");
+    if (site) site.textContent = s === "admin" ? "D-Admin" : "D-Chat";
     if (s === "chat") {
       stripAdminCards();
       applySidebarForStyle("chat");
