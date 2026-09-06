@@ -495,11 +495,16 @@ html[data-style="admin"] .section-block.admin-card.tone-youtube {
   background: #fb7185;
   border-color: #f43f5e;
 }
+html[data-style="admin"] .section-block.admin-card.tone-summary {
+  background: #fbbf24;
+  border-color: #f59e0b;
+}
 /* same bright box colors in dark; page bg stays black */
 html[data-theme="dark"][data-style="admin"] .section-block.admin-card.tone-mail,
 html[data-theme="dark"][data-style="admin"] .section-block.admin-card.tone-calendar,
 html[data-theme="dark"][data-style="admin"] .section-block.admin-card.tone-x,
-html[data-theme="dark"][data-style="admin"] .section-block.admin-card.tone-youtube {
+html[data-theme="dark"][data-style="admin"] .section-block.admin-card.tone-youtube,
+html[data-theme="dark"][data-style="admin"] .section-block.admin-card.tone-summary {
   color: #0f172a;
 }
 html[data-style="admin"] .section-block.admin-card.expanded {
@@ -1398,7 +1403,7 @@ function refreshAdminKpis() {
     if (sec.classList.contains("expanded")) openIds[sec.id] = true;
   });
   sections.forEach(function (sec) {
-    sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
+    sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube", "tone-summary");
     sec.querySelectorAll(".sec-count, .sec-unit").forEach(function (n) { n.remove(); });
     var head = sec.querySelector(".section-head");
     if (head) {
