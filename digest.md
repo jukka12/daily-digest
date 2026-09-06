@@ -1,10 +1,10 @@
 # Digest
 
-## Sähköposti:
+## Mail:
 
 1. **Uskonkirjat** — Päivän Sana (6.9). folder:inbox
 
-## Kalenteri
+## Calendar
 
 1. **9.9** — SPCX Unlock: Day 90 (~319M shares)
    https://www.google.com/calendar/event?eid=MGxhYmY2NmltbGN0Z3BubGsyazZtMHI1azAganVra2EueWxvbmVuQG0&ctz=Europe/Helsinki
@@ -13,7 +13,7 @@
 3. **24.9** — SPCX Unlock: Day 105 (~328M shares)
    https://www.google.com/calendar/event?eid=ZzNlOTIzMm5kaWg4aDduYnVjaDdhbzk2N2cganVra2EueWxvbmVuQG0&ctz=Europe/Helsinki
 
-## Uutiset:
+## News:
 
 1. Elon RT: Cybercab as a paraplegic — 10/10 (quotes @Wheelchairpapii)
    https://x.com/elonmusk/status/2096413676932907464
@@ -30,7 +30,7 @@
 7. Elon: Grok @Bot usage limits reset
    https://x.com/elonmusk/status/2096332306847875580
 
-## Youtube
+## Videos
 
 1. **Randy Kirk — Elon Predicts 90% Market Share for This**
    Market-share prediction clip.
@@ -47,7 +47,7 @@
    https://www.youtube.com/watch?v=ILUKNt9javI
    6.9 00:10
 
-## Yhteenveto
+## Summary
 
 1. **31.8** — Skannattu valtakirja Heikille ja Elsille; perinnönjako sovittu 11.9 klo 13.
 2. **3.–4.9** — Lainhuuto käynnistetty ja maksettu; eteneminen luonnoksella; Elsi (OP) kuittaa osakkaat.
