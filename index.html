@@ -310,6 +310,17 @@ a.item-row:hover, .item-row:hover { background: var(--msg-hover); text-decoratio
   font-size: 16px;
   font-weight: 600;
 }
+.mail-folder-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1em;
+  height: 1.1em;
+  margin-left: 0.45em;
+  vertical-align: -0.15em;
+  opacity: 0.85;
+}
+.mail-folder-ico svg { width: 1.05em; height: 1.05em; display: block; }
 .item-row strong,
 .item-row b {
   font-weight: 600;
@@ -1048,6 +1059,44 @@ function extractHref(el) {
   return m ? m[0] : null;
 }
 
+
+var FOLDER_ICONS = {
+  inbox: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>',
+  archive: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>',
+  trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  sent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+  drafts: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+  junk: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  other: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>'
+};
+function normalizeFolder(raw) {
+  var f = String(raw || "").toLowerCase().trim();
+  if (!f) return null;
+  if (/(inbox|saapuneet|inbox)/.test(f)) return "inbox";
+  if (/(archive|arkisto|all mail)/.test(f)) return "archive";
+  if (/(trash|bin|roska|deleted)/.test(f)) return "trash";
+  if (/(sent|lähetety)/.test(f)) return "sent";
+  if (/(draft|luonnos)/.test(f)) return "drafts";
+  if (/(junk|spam|roskapost)/.test(f)) return "junk";
+  return "other";
+}
+function extractFolder(htmlOrText) {
+  var m = String(htmlOrText || "").match(/\bfolder\s*:\s*([a-zA-ZäöåÄÖÅ0-9_\- ]+)/i);
+  if (!m) return { folder: null, cleaned: htmlOrText };
+  var folder = normalizeFolder(m[1]);
+  var cleaned = String(htmlOrText).replace(/\s*[·•]?\s*folder\s*:\s*[a-zA-ZäöåÄÖÅ0-9_\- ]+/i, "").replace(/\s+$/g, "");
+  return { folder: folder, cleaned: cleaned };
+}
+function appendFolderIcon(row, folder) {
+  if (!folder || !FOLDER_ICONS[folder]) return;
+  var span = document.createElement("span");
+  span.className = "mail-folder-ico";
+  span.title = folder;
+  span.setAttribute("aria-label", folder);
+  span.innerHTML = FOLDER_ICONS[folder];
+  row.appendChild(span);
+}
+
 function buildItemRows(container, kind) {
   var list = document.createElement("div");
   list.className = "item-list";
@@ -1116,7 +1165,14 @@ function buildItemRows(container, kind) {
     if (!chunks.length) return;
     var html = chunks[0];
     for (var i = 1; i < chunks.length; i++) html += '<span class="sub">' + chunks[i] + "</span>";
-    row.innerHTML = html;
+    if (kind === "mail") {
+      var extracted = extractFolder(html);
+      html = extracted.cleaned;
+      row.innerHTML = html;
+      appendFolderIcon(row, extracted.folder);
+    } else {
+      row.innerHTML = html;
+    }
     if (isRowDismissed(kind, row)) return;
     enableSwipeDismiss(row, kind);
     list.appendChild(row);
