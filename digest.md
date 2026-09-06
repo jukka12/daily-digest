@@ -53,4 +53,4 @@
 2. **3.–4.9** — Lainhuuto käynnistetty ja maksettu; eteneminen luonnoksella; Elsi (OP) kuittaa osakkaat.
 3. **4.9** — Apple Hide My Email otettu käyttöön luma.comille.
 
-tila: valmis · päivitetty 6.9 05:17 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri seuraavat (9.9–); Youtube tilaukset 6.9 00:01 alkaen
+tila: valmis · päivitetty 6.9 07:39 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri seuraavat (9.9–); Youtube tilaukset 6.9 00:01 alkaen
