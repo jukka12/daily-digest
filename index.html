@@ -768,7 +768,7 @@ html[data-style="chat"] .sec-unit { display: none !important; }
           <a href="https://jukka12.github.io/fifo-vero/">Coinbase FIFO</a>
         </nav>
         <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Nykyinen Chat — vaihda Adminiin">→ Admin</button>
-        <span id="footChannel" hidden># kaikki</span>
+        <span id="footChannel" hidden>Kaikki</span>
         <span id="footMeta" hidden>Ladataan…</span>
       </footer>
     </main>
@@ -1265,11 +1265,11 @@ function renderChat(root, markdownHtml) {
   allBtn.className = "nav-item active";
   allBtn.innerHTML = "<span class=\"nav-ico\" aria-hidden=\"true\">" +
     "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z\"/></svg>" +
-    "</span><span class=\"hash\">#</span> <span class=\"nav-label-text\">kaikki</span>";
+    "</span><span class=\"nav-label-text\">Kaikki</span>";
   allBtn.addEventListener("click", function () {
     document.querySelectorAll(".nav-item").forEach(function (b) { b.classList.remove("active"); });
     allBtn.classList.add("active");
-    document.getElementById("footChannel").textContent = "# kaikki";
+    document.getElementById("footChannel").textContent = "Kaikki";
     document.querySelectorAll(".section-block").forEach(function (s) {
       s.style.display = "";
       s.classList.remove("expanded");
@@ -1331,11 +1331,11 @@ function renderChat(root, markdownHtml) {
         var kind = sectionKind(secTitle);
         var ico = ICONS[kind] || ICONS.mail;
         b.innerHTML = "<span class=\"nav-ico\" aria-hidden=\"true\">" + ico + "</span>" +
-          "<span class=\"hash\">#</span> <span class=\"nav-label-text\">" + secTitle + "</span>";
+          "<span class=\"nav-label-text\">" + secTitle + "</span>";
         b.addEventListener("click", function () {
           document.querySelectorAll(".nav-item").forEach(function (x) { x.classList.remove("active"); });
           b.classList.add("active");
-          document.getElementById("footChannel").textContent = "# " + secTitle;
+          document.getElementById("footChannel").textContent = secTitle;
           document.querySelectorAll(".section-block").forEach(function (s) {
             s.style.display = s.id === secId ? "" : "none";
             s.classList.remove("expanded");
