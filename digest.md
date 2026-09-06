@@ -2,18 +2,7 @@
 
 ## Sähköpostit:
 
-1. **Luominen ry** — Alkusyksyn lukuvinkkejä ja kauppakirje.
-2. **Matt Sorger** — Intian Rescue1-kuukausikatsaus.
-3. **Fullness Network** — Päivän hengellinen uutiskirje.
-4. **K-Plussa** — Elokuun Plussa-säästöt ja alennukset.
-5. **Creation.com Daily** — Artikkeli: onko muilla planeetoilla elämää.
-6. **Coinbase** — Tervetuloa Developer Platformiin; varmista että rekisteröidyit itse.
-7. **Uskonkirjat** — Päivän Sana.
-8. **ARK Trading Desk** — ETF-kauppojen päiväilmoitus.
-9. **Catherine Wood** — Viikon osakekommentit (suuret liikkeet).
-10. **Glory of Zion** — Kutsu sunnuntain webcastiin.
-11. **Krista Abbott** — Lukematon mainos kirjoituskurssista (vanhempi).
-12. **Minisforum EU** — Lukematon minitietokoneen tarjous (vanhempi).
+1. **Uskonkirjat** — Päivän Sana (6.9). folder:inbox
 
 ## Kalenteri
 
@@ -24,50 +13,44 @@
 3. **24.9** — SPCX Unlock: Day 105 (~328M shares)
    https://www.google.com/calendar/event?eid=ZzNlOTIzMm5kaWg4aDduYnVjaDdhbzk2N2cganVra2EueWxvbmVuQG0&ctz=Europe/Helsinki
 
-
 ## Uutiset:
 
-1. Cathie: human-driven cars will be called WMDs (quotes Brett Winton)
-   https://x.com/CathieDWood/status/2096167207705174265
-
-2. Cathie: AI is already a technology revolution — ARK rarely underestimates the pace
-   https://x.com/CathieDWood/status/2096164982144548936
-
-3. Elon: It will only get better (quotes a Cybercab rider saying it’s the most enjoyable AV ride)
-   https://x.com/elonmusk/status/2096138449250091368
-
-4. Elon: True — Tesla under the hood is first-principles vs other cars
-   https://x.com/elonmusk/status/2096137939134591024
-
-5. Elon: Serious tonnage to space (on Starbase Louisiana)
-   https://x.com/elonmusk/status/2096117629739999581
+1. Elon RT: Cybercab as a paraplegic — 10/10 (quotes @Wheelchairpapii)
+   https://x.com/elonmusk/status/2096413676932907464
+2. Elon: Cybercab (quotes Dave Lee — “Cybercab is astounding”)
+   https://x.com/elonmusk/status/2096392046877770238
+3. Elon RT: Dave Lee — take Cybercab lessons into next-gen AI-driven vehicles people can buy
+   https://x.com/elonmusk/status/2096395796803633315
+4. Elon: Grok (quotes El Salvador AI tutoring pilot in 171 public schools)
+   https://x.com/elonmusk/status/2096402943981604902
+5. Elon: stock in SpaceX and Tesla, not a pile of cash — value rises with usefulness; shareholders benefit
+   https://x.com/elonmusk/status/2096332964485296204
+6. Tesla: 🎯 (quotes: coolest Cybercab thing — buy your own Tesla that can do the same while you supervise)
+   https://x.com/Tesla/status/2096303110725718364
+7. Elon: Grok @Bot usage limits reset
+   https://x.com/elonmusk/status/2096332306847875580
 
 ## Youtube
 
-1. **Next Big Future — Chris Camillo Is Wrong About Cybercab - Here's Why**
-   Counter to Camillo on Cybercab.
-   https://www.youtube.com/watch?v=AjYFIL3FHrQ
-   5.9 19:43
+1. **Randy Kirk — Elon Predicts 90% Market Share for This**
+   Market-share prediction clip.
+   https://www.youtube.com/watch?v=7LE6uvLoRks
+   6.9 04:46
 
-2. **Randy Kirk — Tesla App Store Moment Almost Here Creating Massive New Self Employment Opportunities**
-   App Store / self-employment angle.
-   https://www.youtube.com/watch?v=MJgsoHrnjlo
-   5.9 18:04
+2. **Anthony Rogers — THE TRINITY: A Biblical-Theological Unfolding of the Trinity in Creation and Redemption**
+   Theology lecture.
+   https://www.youtube.com/watch?v=7E2PfpG5URI
+   6.9 01:10
 
-3. **Iowa Tesla Guy — Tesla’s BIGGEST Update of 2026 Is Here!**
-   2026 update roundup.
-   https://www.youtube.com/watch?v=CmbD-0Edl9M
-   5.9 17:04
+3. **Randy Kirk — Cathie Wood from Ark Invest on Kevin Warsh, Inflation, Gold, Bitcoin, the Deficit and more**
+   Cathie Wood / ARK interview clip.
+   https://www.youtube.com/watch?v=ILUKNt9javI
+   6.9 00:10
 
-4. **Dave Lee — Tesla just reinvented the car (Cybercab is here)**
-   Cybercab overview.
-   https://www.youtube.com/watch?v=OYx3o27Cw-U
-   5.9 06:04
+## Happier
 
-5. **ARK Invest — Cathie Wood: This Hasn't Happened Since Before The Depression | In The Know**
-   Cathie on market/AI backdrop.
-   https://www.youtube.com/watch?v=bjgy0BVFQx0
-   5.9 02:04
+1. **31.8** — Skannattu valtakirja Heikille ja Elsille; perinnönjako sovittu 11.9 klo 13.
+2. **3.–4.9** — Lainhuuto käynnistetty ja maksettu; eteneminen luonnoksella; Elsi (OP) kuittaa osakkaat.
+3. **4.9** — Apple Hide My Email otettu käyttöön luma.comille.
 
-
-tila: valmis · päivitetty 5.9 20:55 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri seuraavat (9.9–); Youtube tilaukset 5.9 00:01 alkaen
+tila: valmis · päivitetty 6.9 05:17 · ikkuna: posti tänään 00:01 alkaen + lukemattomat; kalenteri seuraavat (9.9–); Youtube tilaukset 6.9 00:01 alkaen
