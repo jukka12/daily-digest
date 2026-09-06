@@ -633,6 +633,31 @@ html[data-style="chat"] .sidebar {
   background: var(--sidebar) !important;
   color: var(--sidebar-text) !important;
 }
+/* Chat sidebar: muted gray accent (no purple fill) */
+html[data-style="chat"] .sidebar {
+  border-right: 1px solid color-mix(in srgb, #9a9a9a 16%, transparent);
+}
+html[data-style="chat"] .nav-item {
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+html[data-style="chat"] .nav-item.active {
+  background: transparent !important;
+  color: var(--sidebar-text) !important;
+  border-color: color-mix(in srgb, #b0b0b0 42%, transparent);
+}
+html[data-style="chat"] .nav-item:hover {
+  background: color-mix(in srgb, #9a9a9a 10%, transparent);
+}
+html[data-style="chat"] .sidebar-resizer {
+  width: 3px;
+}
+html[data-style="chat"] .sidebar-resizer:hover,
+html[data-style="chat"] .sidebar-resizer.dragging {
+  width: 3px;
+  background: color-mix(in srgb, #9a9a9a 28%, transparent);
+}
+
 @media (max-width: 640px) {
   html[data-style="chat"] .sidebar { display: none !important; }
 }
