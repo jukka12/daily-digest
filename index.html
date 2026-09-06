@@ -131,8 +131,12 @@ body {
 .site-links a:hover { color: var(--ink); opacity: 1; }
 .site-links a[aria-current="page"] {
   color: var(--ink);
-  pointer-events: none;
 }
+#ddSiteLink {
+  cursor: pointer;
+  pointer-events: auto;
+}
+#ddSiteLink:hover { opacity: 0.85; }
 html[data-style="admin"] .site-links a { color: var(--admin-muted, var(--muted)); }
 html[data-style="admin"] .site-links a:hover,
 html[data-style="admin"] .site-links a[aria-current="page"] {
