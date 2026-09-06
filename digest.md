@@ -1,6 +1,6 @@
 # Digest
 
-## Sähköpostit:
+## Sähköposti:
 
 1. **Uskonkirjat** — Päivän Sana (6.9). folder:inbox
 
@@ -47,7 +47,7 @@
    https://www.youtube.com/watch?v=ILUKNt9javI
    6.9 00:10
 
-## Happier
+## Yhteenveto
 
 1. **31.8** — Skannattu valtakirja Heikille ja Elsille; perinnönjako sovittu 11.9 klo 13.
 2. **3.–4.9** — Lainhuuto käynnistetty ja maksettu; eteneminen luonnoksella; Elsi (OP) kuittaa osakkaat.
