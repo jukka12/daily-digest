@@ -97,12 +97,13 @@ body {
 
 .site-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px 14px;
   justify-content: center;
   align-items: center;
-  margin: 0 0 10px;
-  width: 100%;
+  margin: 0;
+  width: auto;
+  white-space: nowrap;
 }
 .site-links a {
   color: var(--muted);
@@ -122,8 +123,11 @@ html[data-style="admin"] .site-links a[aria-current="page"] {
   color: var(--admin-ink);
 }
 .style-foot {
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
 }
 
 html[data-style="admin"] .style-foot {
