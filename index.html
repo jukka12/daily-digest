@@ -53,6 +53,16 @@ html.dd-chat[data-theme="dark"] {
   --sidebar: #000000;
   --msg-bg: #000000;
 }
+html[data-theme="light"][data-style="chat"],
+html.dd-chat[data-theme="light"] {
+  --rail: #e8e8ea;
+  --sidebar: #f3f3f5;
+  --sidebar-hover: #e4e4e8;
+  --sidebar-text: #1d1c1d;
+  --sidebar-muted: #6b6b76;
+  --msg-bg: #ffffff;
+}
+
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 body {
@@ -763,12 +773,11 @@ html[data-style="chat"] .sec-unit { display: none !important; }
       <div class="thread"><article id="content"></article></div>
       <footer class="style-foot" aria-label="Sivun ala">
         <nav class="site-links" aria-label="Sivut">
-          <a href="https://jukka12.github.io/daily-digest/" aria-current="page" id="ddSiteLink">D-C/A</a>
+          <a href="https://jukka12.github.io/daily-digest/" aria-current="page" id="ddSiteLink" role="button">Daily Digest</a>
           <a href="https://jukka12.github.io/x-daily/">X-Daily</a>
           <a href="https://jukka12.github.io/fifo-vero/">Coinbase FIFO</a>
         </nav>
-        <button type="button" class="style-toggle" id="styleToggle" aria-label="Vaihda sivun tyyliä" title="Nykyinen Chat — vaihda Adminiin">→ Admin</button>
-        <span id="footChannel" hidden>Kaikki</span>
+        <span id="footChannel" hidden>All</span>
         <span id="footMeta" hidden>Ladataan…</span>
       </footer>
     </main>
@@ -794,14 +803,13 @@ html[data-style="chat"] .sec-unit { display: none !important; }
 })();
 
 (function () {
-  var btn = document.getElementById("styleToggle");
+  var site = document.getElementById("ddSiteLink");
   function currentStyle() {
     return document.documentElement.getAttribute("data-style") === "admin" ? "admin" : "chat";
   }
   function applySidebarForStyle(s) {
     var side = document.querySelector("nav.sidebar");
     if (!side) return;
-    // Chat owns the dark Kanavat sidebar; Admin is boxes-only (no sidebar)
     if (s === "chat") {
       var narrow = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
       side.hidden = !!narrow;
@@ -821,7 +829,7 @@ html[data-style="chat"] .sec-unit { display: none !important; }
   }
   function stripAdminCards() {
     document.querySelectorAll(".section-block").forEach(function (sec) {
-      sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube");
+      sec.classList.remove("admin-card", "expanded", "tone-mail", "tone-calendar", "tone-x", "tone-youtube", "tone-summary");
       sec.style.cssText = "";
       sec.querySelectorAll(".sec-count, .sec-unit").forEach(function (n) { n.remove(); });
       var head = sec.querySelector(".section-head");
@@ -842,12 +850,11 @@ html[data-style="chat"] .sec-unit { display: none !important; }
     root.classList.toggle("dd-admin", s === "admin");
     root.classList.toggle("dd-chat", s === "chat");
     try { localStorage.setItem("dd-style", s); } catch (e) {}
-    // Current theme name on the button
-    btn.textContent = s === "admin" ? "→ Chat" : "→ Admin";
-    btn.setAttribute("aria-label", s === "admin" ? "Vaihda Chat-tyyliin" : "Vaihda Admin-tyyliin");
-    btn.title = s === "admin" ? "Nykyinen Admin — vaihda Chatiin" : "Nykyinen Chat — vaihda Adminiin";
-    var site = document.getElementById("ddSiteLink");
-    if (site) site.textContent = "D-C/A";
+    if (site) {
+      site.textContent = "Daily Digest";
+      site.title = s === "admin" ? "Daily Digest · Admin — tap for Chat" : "Daily Digest · Chat — tap for Admin";
+      site.setAttribute("aria-label", site.title);
+    }
     if (s === "chat") {
       stripAdminCards();
       applySidebarForStyle("chat");
@@ -858,9 +865,12 @@ html[data-style="chat"] .sec-unit { display: none !important; }
     }
     void root.offsetHeight;
   }
-  btn.addEventListener("click", function () {
-    setStyle(currentStyle() === "admin" ? "chat" : "admin");
-  });
+  if (site) {
+    site.addEventListener("click", function (e) {
+      e.preventDefault();
+      setStyle(currentStyle() === "admin" ? "chat" : "admin");
+    });
+  }
   window.addEventListener("resize", function () {
     setStyle(currentStyle());
   });
@@ -1019,21 +1029,21 @@ function sectionKind(title) {
   var t = (title || "").toLowerCase();
   if (t.indexOf("sähkö") === 0 || t.indexOf("sahko") === 0 || t.indexOf("mail") === 0) return "mail";
   if (t.indexOf("kalenteri") === 0 || t.indexOf("calendar") === 0) return "calendar";
-  if (t.indexOf("uutiset") === 0 || t === "x") return "x";
+  if (t.indexOf("uutiset") === 0 || t === "x" || t === "news") return "x";
   if (t.indexOf("youtube") === 0 || t.indexOf("video") === 0) return "youtube";
-  if (t.indexOf("happier") === 0 || t.indexOf("yhteenveto") === 0) return "summary";
+  if (t.indexOf("happier") === 0 || t.indexOf("yhteenveto") === 0 || t.indexOf("summary") === 0) return "summary";
   return "mail";
 }
 
 function displaySectionTitle(title) {
   var raw = (title || "").trim().replace(/:$/, "");
   var t = raw.toLowerCase();
-  if (t === "kaikki" || t === "all") return "Kaikki";
-  if (t.indexOf("sähkö") === 0 || t.indexOf("sahko") === 0 || t.indexOf("mail") === 0) return "Sähköposti";
-  if (t.indexOf("kalenteri") === 0 || t.indexOf("calendar") === 0) return "Kalenteri";
-  if (t.indexOf("uutiset") === 0 || t === "x") return "Uutiset";
-  if (t.indexOf("youtube") === 0 || t.indexOf("video") === 0) return "Youtube";
-  if (t.indexOf("happier") === 0 || t.indexOf("yhteenveto") === 0) return "Yhteenveto";
+  if (t === "kaikki" || t === "all") return "All";
+  if (t.indexOf("sähkö") === 0 || t.indexOf("sahko") === 0 || t.indexOf("mail") === 0) return "Mail";
+  if (t.indexOf("kalenteri") === 0 || t.indexOf("calendar") === 0) return "Calendar";
+  if (t.indexOf("uutiset") === 0 || t === "x" || t === "news") return "News";
+  if (t.indexOf("youtube") === 0 || t.indexOf("video") === 0) return "Videos";
+  if (t.indexOf("happier") === 0 || t.indexOf("yhteenveto") === 0 || t.indexOf("summary") === 0) return "Summary";
   return raw;
 }
 
@@ -1279,11 +1289,11 @@ function renderChat(root, markdownHtml) {
   allBtn.className = "nav-item active";
   allBtn.innerHTML = "<span class=\"nav-ico\" aria-hidden=\"true\">" +
     "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z\"/></svg>" +
-    "</span><span class=\"nav-label-text\">Kaikki</span>";
+    "</span><span class=\"nav-label-text\">All</span>";
   allBtn.addEventListener("click", function () {
     document.querySelectorAll(".nav-item").forEach(function (b) { b.classList.remove("active"); });
     allBtn.classList.add("active");
-    document.getElementById("footChannel").textContent = "Kaikki";
+    document.getElementById("footChannel").textContent = "All";
     document.querySelectorAll(".section-block").forEach(function (s) {
       s.style.display = "";
       s.classList.remove("expanded");
@@ -1382,7 +1392,7 @@ function refreshAdminKpis() {
   if (old) old.remove();
   var sections = Array.from(content.querySelectorAll(".section-block"));
   var isAdmin = document.documentElement.getAttribute("data-style") === "admin";
-  var units = { mail: "Mails", calendar: "Events", x: "Posts", youtube: "Videos", summary: "Notes" };
+  var units = { mail: "Mail", calendar: "Calendar", x: "News", youtube: "Videos", summary: "Summary" };
   var openIds = {};
   sections.forEach(function (sec) {
     if (sec.classList.contains("expanded")) openIds[sec.id] = true;
